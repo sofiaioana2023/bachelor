@@ -7,7 +7,7 @@ import Quiz from "./pages/Quiz";
 import Application from "./pages/Application";
 import Lecture from "./pages/Lecture";
 import HomePage from "./pages/HomePage";
-import { ClipLoader, PuffLoader } from "react-spinners"; // Import ClipLoader
+import { ClipLoader, PuffLoader } from "react-spinners";
 import { Typography } from "@mui/material";
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false); // Set isLoading to false when your app is ready.
-    }, 2000);
+      setIsLoading(false);
+    }, 100);
   }, []);
 
   return (

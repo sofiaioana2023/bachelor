@@ -577,19 +577,8 @@ a:hover{
 .buttonCONGRATS{
   color: #000
 }
-.applicationLaborator{
-  display:flex;
-  flex-direction: column;
 
- 
 
-}
-.applicationLabStates{
-  border : 5px solid #000;
-  width:1600px;
-  height:1200px;
-  margin:50px;
-}
 .contentPage{
   display:flex;
   flex-direction: column;
@@ -597,25 +586,44 @@ a:hover{
   align-items: center;
 }
 .MeniuLab{
-  background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(1,3,3,1) 100%);
-width:1600px;
+ 
+  background-color:#dfdae3;
+  width:1600px;
   height:1200px;
+  border:solid 3px #000;
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color:aliceblue;
+  color:#000;
+  margin-top: 50px;
+  box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
+
   
 }
 .submenu{
-  width:600px;
-  height:400px;
-  background-color: #B8C6CD;
+  
   display: flex;
   flex-direction:column;
   justify-content: center;
   align-items: center;
-  background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(11,4,38,0.4192270658263305) 100%);
+  
+
+
+}
+.buttonSubmenu{
+  background-color: #000;
+  color:aliceblue;
+
+}
+.MeniuLab h1{
+  text-align: center;
+}
+.alegePolinom{
+  width:1500px;
+  height: 800px;
+  font-size: 30px;
+  justify-content: start;
+  align-items: end;
+  font-weight: 500;
 }

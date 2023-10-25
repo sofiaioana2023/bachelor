@@ -8,23 +8,61 @@ const Meniu = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="MeniuLab">
-      <h1 style={{ marginBottom: "300px" }}>
-        Cod Hamming ciclic corector de eroare
+    <div>
+      <h1
+        style={{
+          marginBottom: "300px",
+          fontSize: "40px",
+        }}
+      >
+        (De)codarea codului Hamming ciclic corector de o eroare prin circuitul
+        bazat pe RDR cu sumatoare modulo-2 exterioare
       </h1>
       <div className="submenu">
         <Link to={"/lecture"}>
-          <Button variant="contained" style={{ marginBottom: "10px" }}>
-            Aspecte Teoretice
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#000",
+              color: "aliceblue",
+              fontWeight: "800px",
+              margin: "25px 0px",
+              width: "300px",
+              height: "60px",
+            }}
+          >
+            <b>Aspecte Teoretice</b>
           </Button>
         </Link>
-        <Button variant="contained" onClick={() => setLabState("coder")}>
-          Coder
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "#000",
+            color: "aliceblue",
+            fontWeight: "800px",
+            margin: "25px 0px",
+            width: "300px",
+            height: "60px",
+          }}
+          onClick={() => setLabState("alegepolinom")}
+        >
+          <b>Începe simularea</b>
         </Button>
-
-        {/* <Button onClick={() => setLabState("coder")}>
-          click pentru a coda
-        </Button> */}
+        <Link to={"/about"}>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#000",
+              color: "aliceblue",
+              fontWeight: "800px",
+              margin: "25px 0px",
+              width: "300px",
+              height: "60px",
+            }}
+          >
+            <b>Autori</b>
+          </Button>
+        </Link>
       </div>
     </div>
   );
