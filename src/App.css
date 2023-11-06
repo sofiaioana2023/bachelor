@@ -587,9 +587,9 @@ a:hover{
 }
 .MeniuLab{
  
-  background-color:#dfdae3;
-  width:1600px;
-  height:1200px;
+  background-color:#9BAFB5;
+  width:1700px;
+  height:1700px;
   border:solid 3px #000;
   display:flex;
   flex-direction: column;
@@ -603,12 +603,16 @@ a:hover{
 }
 .submenu{
   
+  height:700px;
+  width:900px;
   display: flex;
   flex-direction:column;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
   
-
+  border: 5px solid #000;
+  
 
 }
 .buttonSubmenu{
@@ -620,10 +624,60 @@ a:hover{
   text-align: center;
 }
 .alegePolinom{
-  width:1500px;
-  height: 800px;
+  width:1400px;
+  height: 1600px;
   font-size: 30px;
-  justify-content: start;
-  align-items: end;
+  justify-content: center;
+  align-items:center;
+ 
   font-weight: 500;
+}
+.labelBiti{
+  font-size: 35px;
+  font-weight: 800;
+}
+.inputBiti{
+  text-align: center;
+  padding:10px;
+  width:200px;
+  height:80px;
+  font-size: 35px;
+  background-color: #e0e0de;
+  color: #000;
+  border-radius: 15px;
+  margin-top: 10px;
+  outline: yellow;
+  border: 2px solid #FDC87E;
+
+
+}
+.aboutLayout{
+  padding: 50px;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("./icons/backgroudAbout.jpeg");
+  background-size: cover;
+  display:flex;
+  justify-content: space-around;
+  
+  
+}
+.continutAbout{
+  padding:"100px";
+  background-color:#05050559;
+  width: 1200px;
+  height: 720px;
+  opacity: 0.6;
+  font-size: 12px;
+  color: #000;
+  padding:25px;
+}
+.transmisia{
+  font-size: 20px;
+  font-weight: 900px;
+
+}
+.titleApplication{
+  border: 2px solid #000;
+  box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
 }

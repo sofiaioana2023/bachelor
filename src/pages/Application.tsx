@@ -11,12 +11,15 @@ import AlegePol from "../componentsLab/AlegePol";
 
 const Application = () => {
   const [labState, setLabState] = useState<string>("meniu");
+  const [userName, setUserName] = useState<string>("");
 
   return (
     <Layout>
       <div className="MeniuLab">
         <div className="applicationLabStates">
-          <labContext.Provider value={{ labState, setLabState }}>
+          <labContext.Provider
+            value={{ labState, setLabState, setUserName, userName }}
+          >
             {labState === "meniu" && <Meniu />}
             {labState === "coder" && <CoderAnimation />}
             {labState === "end" && <EndLab />}

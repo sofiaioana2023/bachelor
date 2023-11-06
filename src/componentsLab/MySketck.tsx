@@ -4,7 +4,8 @@ import { use } from "i18next";
 import { labContext } from "../helpers/Contexts";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
-import { PieChart } from "@mui/icons-material";
+import { Person4, PieChart } from "@mui/icons-material";
+import { yellow } from "@mui/material/colors";
 
 export function MySketch(p5: any, props: any) {
   const {
@@ -18,15 +19,18 @@ export function MySketch(p5: any, props: any) {
     tactCanvas,
     informationByUser,
     currentStep,
+    transmissionEnded,
   } = props;
+  let myFont = "";
+
   p5.preload = () => {
-    p5.loadFont(
+    // Load your font in the preload function.
+    myFont = p5.loadFont(
       "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Bold.otf"
     );
   };
   let informatieIntrodusaDeUser = p5.createP(informationByUser);
   let informatie = p5.createP("a6a5a4a3");
-  let cuvantulCodat = p5.createP("a6a5a4a3a2a1a0");
   let bitDeControlDreapta = p5.createP(valoareBitRedundant);
   let bitDeControlJos = p5.createP(valoareBitRedundant);
   let xPosition = 60;
@@ -48,8 +52,9 @@ export function MySketch(p5: any, props: any) {
   let TACTREGISTRU = p5.createP(tact);
 
   p5.setup = () => {
-    console.log(celuleRegistru, "zzz");
     p5.createCanvas(1200, 500, p5.WEBGL);
+    p5.textFont(myFont);
+    p5.background(100);
 
     bitC2.style("color", "white");
     bitC2.style("font-weight", "600");
@@ -70,30 +75,30 @@ export function MySketch(p5: any, props: any) {
     bitDeInformatieSus.style("font-weight", "600");
     bitDeInformatieSus.position(60, 425);
     let S1 = p5.createP("S1");
-    S1.style("color", "yellow");
+    S1.style("color", "#ffa600");
     S1.style("font-weight", "600");
     S1.position(154, 223);
 
-    valoareS1.style("color", "yellow");
+    valoareS1.style("color", "white");
     valoareS1.style("font-weight", "600");
     valoareS1.position(157, 265);
 
     let S2 = p5.createP("S2");
-    S2.style("color", "yellow");
+    S2.style("color", "#ffa600");
     S2.style("font-weight", "600");
     S2.position(154, 315);
 
-    valoareS2.style("color", "yellow");
+    valoareS2.style("color", "white");
     valoareS2.style("font-weight", "600");
     valoareS2.position(110, 312);
 
     if (currentStep < 5) bitDeControlDreapta.style("color", "white");
-    else bitDeControlDreapta.style("color", "yellow");
+    else bitDeControlDreapta.style("color", "white");
     bitDeControlDreapta.style("font-weight", "600");
     bitDeControlDreapta.position(177, 265);
 
     if (currentStep < 5) bitDeControlJos.style("color", "white");
-    else bitDeControlJos.style("color", "yellow");
+    else bitDeControlJos.style("color", "white");
     bitDeControlJos.style("font-weight", "600");
     bitDeControlJos.position(240, 265);
 
@@ -101,35 +106,46 @@ export function MySketch(p5: any, props: any) {
     cuvantulDeCod.style("font-weight", "600");
     cuvantulDeCod.position(250, 425);
 
-    cuvantulCodat.style("color", "blue");
-    cuvantulCodat.style("font-weight", "800");
-    cuvantulCodat.position(212, 455);
-
-    informatie.style("color", "blue");
+    informatie.style("color", "#ffa600");
     informatie.style("font-weight", "800");
     informatie.position(15, 455);
 
-    informatieIntrodusaDeUser.style("color", "blue");
+    informatieIntrodusaDeUser.style("color", "#ffa600");
     informatieIntrodusaDeUser.style("font-weight", "800");
-    informatieIntrodusaDeUser.position(15, 405);
+    informatieIntrodusaDeUser.position(30, 425);
 
     TACTREGISTRU.style("color", "#000");
     TACTREGISTRU.style("font-weight", "600");
-    TACTREGISTRU.position(15, 30);
-
-    p5.background(250);
+    TACTREGISTRU.position(5, 30);
   };
   p5.draw = () => {
-    const c = p5.color(255, 100, 100);
-    const c2 = p5.color(100, 100, 100);
+    const c = p5.color(15, 34, 59);
+    const c2 = p5.color(56, 65, 66);
     const c3 = p5.color(20, 20, 20);
     const c5 = p5.color(30, 30, 30);
-
+    const yellow = p5.color(255, 165, 0);
     p5.background(250);
     p5.normalMaterial();
     p5.push();
+    if (tactCanvas === 7 && !transmissionEnded) {
+      p5.fill(yellow);
+
+      p5.beginShape();
+      p5.vertex(-180, 40); // Top-left vertex
+      p5.vertex(-110, 40); // Top-right vertex
+      p5.vertex(-200, 140); // Bottom-right vertex
+      p5.vertex(-200, 140); // Bottom-left vertex
+      p5.endShape(p5.CLOSE); // CLOSE parameter connects the last and first vertices
+
+      p5.beginShape();
+      p5.vertex(-205, -30); // Top-left vertex
+      p5.vertex(-110, -30); // Top-right vertex
+      p5.vertex(-155, 40); // Bottom-right vertex
+      p5.vertex(-205, 40); // Bottom-left vertex
+
+      p5.endShape(p5.CLOSE); // CLOSE parameter connects the last and first vertices
+    }
     p5.fill(c);
-    // p5.text(text, 0, 50) // Adjusted text coordinates
     p5.translate(-550, -150);
     p5.rect(0, 0, 30, 220);
     p5.translate(30, 0);
@@ -195,8 +211,24 @@ export function MySketch(p5: any, props: any) {
         }
       }
     }
+
+    //transmisia
+    // if (tactCanvas < 7) {
+    //   p5.fill(0);
+    //   p5.text("a6a5a4a3a2a1", 212, 455);
+    //   console.log("a6a5a6a4a3a2a1");
+    // } else if (tactCanvas === 7) {
+    //   p5.fill(0);
+    //   p5.text("Atenție, începe transmisia!", 212, 455);
+    //   console.log("Atenție, începe transmisia!");
+    // }
+
     //continuare canal
     p5.fill(c);
+    if (tactCanvas >= 5) {
+      p5.translate(-90, 155);
+    }
+
     p5.translate(100, 0);
     p5.rect(200, 0, 250, 30);
     p5.translate(100, 40);
@@ -261,8 +293,45 @@ export function MySketch(p5: any, props: any) {
     p5.fill(c2);
     p5.translate(20, 0);
     p5.rect(0, -10, 40, 50);
-
+    p5.fill(c);
+    p5.translate(40, -10);
+    p5.rect(0, +10, 30, 30);
+    p5.translate(30, 0);
+    p5.rect(0, -110, 30, 150);
+    p5.translate(30, -110);
+    p5.rect(0, 0, -250, 30);
+    p5.translate(-250, 0);
+    p5.rect(-30, 0, 30, 90);
+    p5.translate(-30, 80);
+    p5.triangle(-5, 0, 35, 0, 15, 30);
+    p5.translate(92.5, 30);
+    p5.rect(10, -45, 15, 50);
+    p5.translate(10, -50);
+    p5.rect(0, 0, 100, 15);
+    p5.translate(100, 0);
+    p5.rect(-10, 0, 15, 40);
+    p5.translate(-18, 22);
+    p5.triangle(-5, 0, 35, 0, 15, 30);
+    p5.fill(c2);
+    p5.translate(-100, 80);
+    p5.rect(2, -8, 5, 25);
+    p5.translate(5, -8);
+    p5.rect(17, 0, 5, 25);
+    p5.translate(22, 0);
+    p5.rect(16, 0, 5, 25);
+    p5.translate(-40, 25);
+    p5.rect(0, 0, 80, 60);
+    p5.fill(c);
+    p5.translate(40, 25);
+    p5.rect(40, -8, 150, 20);
+    p5.translate(170, -78);
+    p5.rect(20, -160, 20, 250);
+    p5.translate(0, -180);
+    p5.rect(-50, 20, 90, 20);
+    p5.translate(-30, 0);
+    p5.rect(-23, -6, 20, 45);
     p5.pop();
+
     ///miscare biti
     bitDeInformatie.style("color", "white");
     bitDeInformatieSus.style("color", "white");
@@ -348,6 +417,18 @@ export function MySketch(p5: any, props: any) {
           bitC0JosStanga.html("");
         }
       }
+
+      if (tactCanvas === 7) {
+        if (cuvantulDeCod.position().x <= 660) {
+          if (!transmissionEnded)
+            cuvantulDeCod.position(250 + p5.frameCount, 425);
+          if (cuvantulDeCod.position().x === 660 || transmissionEnded) {
+            cuvantulDeCod.position(660, 425);
+          }
+        }
+      }
+
+      // setTimeout(moveBits, 3000);
     }
   };
 }
