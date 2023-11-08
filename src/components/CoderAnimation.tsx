@@ -11,6 +11,7 @@ import slide5 from "../icons/tact4.png";
 import slide6 from "../icons/tact5.png";
 import slide7 from "../icons/tact6.png";
 import slide8 from "../icons/tact7.png";
+import decoderschema from "../icons/decoderschema.png";
 const CoderAnimation = () => {
   const { labState, setLabState } = React.useContext(labContext);
   const [userInput, isUserInput] = React.useState<boolean>(false);
@@ -22,6 +23,7 @@ const CoderAnimation = () => {
     React.useState<string>("");
   const [errorWord, setErrorWord] = React.useState<number[]>([]);
   const [wrongInformation, setWrongInformation] = React.useState<string>("");
+  const [isDecoding, setisDecoding] = React.useState<boolean>(false);
   const slides = [
     slide1,
     slide2,
@@ -32,9 +34,23 @@ const CoderAnimation = () => {
     slide7,
     slide8,
   ];
+
+  let cuvantdecodreceptionatsicorectat = [];
+  let pozeinr = 0;
+  let celuleDecodor = [0, 0, 0];
+  let contorStareFixaGasita = 0;
+  let C0d = celuleDecodor[2];
+  let C1d = celuleDecodor[1];
+  let C2d = celuleDecodor[0];
+  const registruStarefixa = [0, 0, 1];
+  let celuleDecodor7: number[] = [];
+  let contorStareFixa = 8;
+  let S4 = 0;
+  let S5 = 0;
   let C2 = 0; // ecran
   let C1 = 0; // ecran
   let C0 = 0; // ecran
+  console.log(`${C2}, ${C1}, ${C0}`);
   let valoareBitRedundant = 0;
   let celuleRegistru = [C2, C1, C0];
   const informatie = informationByUser.split("").map(Number);
@@ -231,6 +247,71 @@ const CoderAnimation = () => {
       }, 4000);
     }
   }, [tactDOM]);
+  ///decoder
+  let r = errorWord;
+
+  for (let i = 1; i <= 7; i++) {
+    C0d = C1d;
+    C1d = C2d;
+    S4 = celuleDecodor[2] ^ celuleDecodor[1];
+    S5 = S4 ^ r[i - 1];
+    C2d = S5;
+    celuleDecodor.unshift(S5);
+    celuleDecodor.pop();
+    console.log(` ${i} ${celuleDecodor}`);
+    if (i === 7) {
+      celuleDecodor7 = celuleDecodor;
+    }
+  }
+  let k = 1;
+
+  if (
+    celuleDecodor7[0] === 0 &&
+    celuleDecodor7[1] === 0 &&
+    celuleDecodor7[2] === 0
+  ) {
+    console.log("nu sunt erori");
+  }
+  if (
+    celuleDecodor7[0] === 0 &&
+    celuleDecodor7[1] === 0 &&
+    celuleDecodor7[2] === 1
+  ) {
+    console.log("s-a identificat starea fixa");
+  } else {
+    console.log("se cauta starea fixa");
+    for (contorStareFixa = 8; contorStareFixa <= 14; contorStareFixa++) {
+      C0d = C1d;
+      C1d = C2d;
+      S4 = celuleDecodor7[2] ^ celuleDecodor7[1];
+      S5 = S4;
+      C2d = S5;
+      celuleDecodor7.unshift(S5);
+      celuleDecodor7.pop();
+      if (k) {
+        console.log(
+          `la tactul ${contorStareFixa} registrul contine val ${celuleDecodor7}`
+        );
+      }
+      if (
+        celuleDecodor7[0] === 0 &&
+        celuleDecodor7[1] === 0 &&
+        celuleDecodor7[2] === 1
+      ) {
+        k = 0;
+        contorStareFixaGasita = contorStareFixa;
+        pozeinr = 13 - contorStareFixaGasita;
+        r[r.length - pozeinr - 1] = r[r.length - pozeinr - 1] ^ 1;
+        cuvantdecodreceptionatsicorectat = r;
+        console.log(
+          `tact stare fixa ${contorStareFixaGasita} si secventa r dupa corectie ${cuvantdecodreceptionatsicorectat}`
+        );
+      }
+    }
+  }
+  const decoding = () => {
+    setisDecoding(true);
+  };
   return (
     <div>
       <Box
@@ -305,11 +386,13 @@ const CoderAnimation = () => {
               }}
               onClick={handleStartClick}
             >
-              {tactDOM === 0
-                ? "START"
-                : tactDOM <= 7 && !wrapProps.transmissionEnded
-                ? `Tact  ${tactDOM}`
-                : "Începe decodarea"}
+              {tactDOM === 0 ? (
+                "START"
+              ) : tactDOM <= 7 && !wrapProps.transmissionEnded ? (
+                `Tact  ${tactDOM}`
+              ) : (
+                <div onClick={decoding}>Începe decodarea</div>
+              )}
             </Button>
           )}
         </div>
@@ -339,7 +422,7 @@ const CoderAnimation = () => {
       </Box>
 
       <img
-        src={slides[tactDOM]}
+        src={isDecoding ? decoderschema : slides[tactDOM]}
         style={{ width: "1300px", height: "760px", marginTop: "20px" }}
       />
 

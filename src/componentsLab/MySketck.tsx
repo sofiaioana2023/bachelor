@@ -31,6 +31,9 @@ export function MySketch(p5: any, props: any) {
       "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Bold.otf"
     );
   };
+  let sursa = p5.createP("SURSĂ");
+  let canal = p5.createP("CANAL");
+  let destinatar = p5.createP("DESTINATAR");
   let positionErrorByUserCanvas = p5.createP(positionErrorByUser);
   let receivedWordWithError = p5.createP(errorWord);
   console.log(`cuvantul eronat in canvas este ${receivedWordWithError}`);
@@ -99,8 +102,23 @@ export function MySketch(p5: any, props: any) {
     S2.style("font-weight", "600");
     S2.position(154, 315);
 
-    valoareS2.style("color", "white");
-    valoareS2.style("font-weight", "600");
+    destinatar.style("color", "#000");
+    destinatar.style("font-weight", "800");
+    destinatar.style("font-size", "20px");
+    destinatar.position(1045, 485);
+
+    sursa.style("color", "#000");
+    sursa.style("font-weight", "800");
+    sursa.style("font-size", "20px");
+    sursa.position(25, 485);
+
+    canal.style("color", "#000");
+    canal.style("font-weight", "800");
+    canal.style("font-size", "20px");
+    canal.position(400, 485);
+
+    valoareS2.style("color", "#000");
+    valoareS2.style("font-weight", "800");
     valoareS2.position(110, 312);
 
     if (currentStep < 5) bitDeControlDreapta.style("color", "white");
