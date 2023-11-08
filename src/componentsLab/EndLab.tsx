@@ -1,61 +1,139 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { labContext } from "../helpers/Contexts";
 import { Button, Typography } from "@mui/material";
-
+import phone from "../icons/backtomenuphoto.png";
+import MAP from "../icons/MAP.png";
+import { handleAplicatie } from "../pages/HomePage";
+import { handleCurs } from "../pages/HomePage";
+import { handleQuiz } from "../pages/HomePage";
 const EndLab = () => {
   const { labState, setLabState, userName, setUserName } =
     useContext(labContext);
-
-  const handleKeyPress = (event: any) => {
-    console.log("Key pressed:", event.key);
-    console.log("Key code:", event.keyCode);
-    if (event.key === " " || event.key === "Enter") {
-      setLabState("meniu");
-    }
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [time, setTime] = useState<string>(new Date().toLocaleTimeString());
+  const refreshTime = () => {
+    setTime(new Date().toLocaleTimeString());
   };
-
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
-    console.log("Active Element:", document.activeElement);
-    return () => {
-      window.removeEventListener("keydown", handleKeyPress);
+    const timeID = setInterval(refreshTime, 1000);
+    return function cleanup() {
+      clearInterval(timeID);
     };
   }, []);
 
-  return (
-    <div
-      onClick={() => setLabState("meniu")}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        fontSize: "30px",
-        fontWeight: "500px",
-      }}
-    >
-      <Typography variant="h2">
-        <b> Felicitări {userName}, ai ajuns la finalul laboratorului!</b>
-      </Typography>
-      <Button
-        variant="contained"
-        style={{
-          backgroundColor: "#000",
-          color: "aliceblue",
-          fontWeight: "800px",
-          margin: "125px 0px 0px 0px",
+  const moveToMenu = () => {
+    setIsHovered(!isHovered);
+    setLabState("meniu");
+  };
 
-          width: "500px",
-          height: "60px",
-          fontSize: "30px",
-          alignSelf: "center",
-          boxShadow:
-            " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
-        }}
+  return (
+    <div style={{ height: "1400px", width: "1300px" }}>
+      <div
         onClick={() => setLabState("meniu")}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "start",
+          alignItems: "center",
+          fontSize: "30px",
+          fontWeight: "500px",
+        }}
       >
-        BACK TO THE MENU
-      </Button>
+        <Typography
+          variant="h2"
+          style={{ margin: "0px 0px 150px 0px", textAlign: "center" }}
+        >
+          <b> Felicitări {userName}, ai ajuns la finalul laboratorului!</b>
+        </Typography>
+        <div className="phoneButton">
+          <img src={phone} />
+          <button
+            className={
+              isHovered ? "positionedButton:hover" : "positionedButton"
+            }
+            style={{
+              color: "aliceblue",
+              fontWeight: "800px",
+              margin: "125px 0px 100px 0px",
+              borderRadius: "50%",
+              width: "80px",
+              height: "80px",
+              fontSize: "30px",
+              alignSelf: "center",
+              boxShadow:
+                " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
+            }}
+            onClick={moveToMenu}
+          ></button>
+          <div className="time">
+            <b>{time}</b>
+          </div>
+        </div>
+
+        <div className="mapButtons">
+          <img src={MAP} style={{ height: "400px", width: "500px" }} />
+          <a title="Quiz">
+            <button
+              className={
+                isHovered ? "positionedButton1:hover" : "positionedButton1"
+              }
+              style={{
+                color: "aliceblue",
+                fontWeight: "800px",
+                margin: "125px 0px 100px 0px",
+                borderRadius: "50%",
+                width: "50px",
+                height: "50px",
+                fontSize: "30px",
+                alignSelf: "center",
+                boxShadow:
+                  " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
+              }}
+              onClick={handleQuiz}
+            ></button>
+          </a>
+          <a title="Curs">
+            <button
+              className={
+                isHovered ? "positionedButton2:hover" : "positionedButton2"
+              }
+              style={{
+                color: "aliceblue",
+                fontWeight: "800px",
+                margin: "125px 0px 100px 0px",
+                borderRadius: "50%",
+                width: "50px",
+                height: "50px",
+                fontSize: "30px",
+                alignSelf: "center",
+                boxShadow:
+                  " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
+              }}
+              onClick={handleCurs}
+            ></button>
+          </a>
+          <a title="Lucrare de laborator">
+            <button
+              className={
+                isHovered ? "positionedButton3:hover" : "positionedButton3"
+              }
+              style={{
+                color: "aliceblue",
+                fontWeight: "800px",
+                margin: "125px 0px 100px 0px",
+                borderRadius: "50%",
+                width: "50px",
+                height: "50px",
+                fontSize: "30px",
+                alignSelf: "center",
+                boxShadow:
+                  " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
+              }}
+              onClick={handleAplicatie}
+            ></button>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

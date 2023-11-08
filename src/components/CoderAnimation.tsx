@@ -38,7 +38,7 @@ const CoderAnimation = () => {
   let valoareBitRedundant = 0;
   let celuleRegistru = [C2, C1, C0];
   const informatie = informationByUser.split("").map(Number);
-
+  let auxErrorWord = [];
   let sumator1 = ""; // ecran
   let sumator2 = ""; // ecran
   let cuvantDeCod = ""; // ecran
@@ -63,6 +63,8 @@ const CoderAnimation = () => {
     informationByUser: string;
     currentStep: number;
     transmissionEnded: boolean;
+    positionErrorByUser: string;
+    errorWord: number[];
   }>({
     sumator1: "1",
     sumator2: "1",
@@ -75,6 +77,8 @@ const CoderAnimation = () => {
     informationByUser: "",
     currentStep: 0,
     transmissionEnded: false,
+    positionErrorByUser: "",
+    errorWord: [],
   });
 
   function* generator(i: number) {
@@ -86,9 +90,7 @@ const CoderAnimation = () => {
     yield secondFor(2);
     yield secondFor(3);
   }
-  // useEffect(() => {
-  //   console.log(`tactul ${tactCanvas} este acum`);
-  // }, [tactCanvas]);
+
   const firstFor = (i: number) => {
     setIsInputDisabled(true);
     tact = `Coderul este la tactul ${i.toString()}`;
@@ -141,11 +143,7 @@ const CoderAnimation = () => {
     C2 = Number(sumator2);
     celuleRegistru.unshift(C2);
     celuleRegistru.pop();
-    console.log(
-      `La tactul ${
-        k + informatie.length
-      } valorile din registru sunt ${celuleRegistru} si bitul redundant este ${valoareBitRedundant}`
-    );
+
     cuvantDeCod += valoareBitRedundant.toString();
     if (tactCanvas === 7) {
       setErrorWord(cuvantDeCod.split("").map(Number));
@@ -173,7 +171,8 @@ const CoderAnimation = () => {
   if (positionErrorByUser) {
     errorWord[errorWord.length - 1 - Number(positionErrorByUser)] =
       errorWord[errorWord.length - 1 - Number(positionErrorByUser)] ^ 1;
-    console.log(`Noua valoarea cuvant eronat ${errorWord}`);
+    auxErrorWord = errorWord;
+    console.log(` cuvant eronat are valoarea ${auxErrorWord}`);
   }
   const gen = React.useMemo(() => generator(1), [userInput, informationByUser]);
 
@@ -215,8 +214,13 @@ const CoderAnimation = () => {
   };
   const handlePositionErrorInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPositionErrorByUser(e.target.value);
-    console.log(positionErrorByUser);
+    setWrapProps({
+      ...wrapProps,
+      positionErrorByUser: e.target.value,
+    });
   };
+
+  console.log(`eroarea este pe pozitiz ${positionErrorByUser}`);
 
   useEffect(() => {
     if (tactDOM === 7) {

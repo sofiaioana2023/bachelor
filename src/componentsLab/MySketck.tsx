@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import { Person4, PieChart } from "@mui/icons-material";
 import { yellow } from "@mui/material/colors";
+import { receiveMessageOnPort } from "worker_threads";
 
 export function MySketch(p5: any, props: any) {
   const {
@@ -20,17 +21,23 @@ export function MySketch(p5: any, props: any) {
     informationByUser,
     currentStep,
     transmissionEnded,
+    errorWord,
+    positionErrorByUser,
   } = props;
   let myFont = "";
 
   p5.preload = () => {
-    // Load your font in the preload function.
     myFont = p5.loadFont(
       "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Bold.otf"
     );
   };
+  let positionErrorByUserCanvas = p5.createP(positionErrorByUser);
+  let receivedWordWithError = p5.createP(errorWord);
+  console.log(`cuvantul eronat in canvas este ${receivedWordWithError}`);
+  console.log(`pozitie eroare in canvas ${positionErrorByUserCanvas}`);
   let informatieIntrodusaDeUser = p5.createP(informationByUser);
   let informatie = p5.createP("a6a5a4a3");
+  let informatieCODATA = p5.createP("a6a5a4a3a2a1a0");
   let bitDeControlDreapta = p5.createP(valoareBitRedundant);
   let bitDeControlJos = p5.createP(valoareBitRedundant);
   let xPosition = 60;
@@ -50,6 +57,10 @@ export function MySketch(p5: any, props: any) {
   let valoareS1 = p5.createP(sumator1);
   let cuvantulDeCod = p5.createP(cuvantDeCod);
   let TACTREGISTRU = p5.createP(tact);
+  let S3 = p5.createP("S3");
+  let S4 = p5.createP("S4");
+  let S5 = p5.createP("S5");
+  let detec = p5.createP("DETECTOR 001");
 
   p5.setup = () => {
     p5.createCanvas(1200, 500, p5.WEBGL);
@@ -110,6 +121,10 @@ export function MySketch(p5: any, props: any) {
     informatie.style("font-weight", "800");
     informatie.position(15, 455);
 
+    informatieCODATA.style("color", "#ffa600");
+    informatieCODATA.style("font-weight", "800");
+    informatieCODATA.position(1050, 455);
+
     informatieIntrodusaDeUser.style("color", "#ffa600");
     informatieIntrodusaDeUser.style("font-weight", "800");
     informatieIntrodusaDeUser.position(30, 425);
@@ -117,6 +132,23 @@ export function MySketch(p5: any, props: any) {
     TACTREGISTRU.style("color", "#000");
     TACTREGISTRU.style("font-weight", "600");
     TACTREGISTRU.position(5, 30);
+
+    // receivedWordWithError.style("color", "red");
+    // receivedWordWithError.style("font-weight", "700");
+    // receivedWordWithError.position(200, 495);
+
+    S3.style("color", "#ffa600");
+    S3.style("font-weight", "600");
+    S3.position(765, 345);
+    S4.style("color", "#ffa600");
+    S4.style("font-weight", "600");
+    S4.position(950, 345);
+    S5.style("color", "#ffa600");
+    S5.style("font-weight", "600");
+    S5.position(982, 122);
+    detec.style("color", "#ffa600");
+    detec.style("font-weight", "600");
+    detec.position(830, 405);
   };
   p5.draw = () => {
     const c = p5.color(15, 34, 59);
@@ -209,6 +241,10 @@ export function MySketch(p5: any, props: any) {
         if (bitDeControlJos.position().y >= 410) {
           bitDeControlJos.html("");
         }
+      }
+      if (positionErrorByUserCanvas) {
+        receivedWordWithError.style("color", "red");
+        receivedWordWithError.position(660, 495);
       }
     }
 
@@ -321,16 +357,16 @@ export function MySketch(p5: any, props: any) {
     p5.rect(16, 0, 5, 25);
     p5.translate(-40, 25);
     p5.rect(0, 0, 80, 60);
-    p5.fill(c);
-    p5.translate(40, 25);
-    p5.rect(40, -8, 150, 20);
-    p5.translate(170, -78);
-    p5.rect(20, -160, 20, 250);
-    p5.translate(0, -180);
-    p5.rect(-50, 20, 90, 20);
-    p5.translate(-30, 0);
-    p5.rect(-23, -6, 20, 45);
-    p5.pop();
+    // p5.fill(c);
+    // p5.translate(40, 25);
+    // p5.rect(40, -8, 150, 20);
+    // p5.translate(170, -78);
+    // p5.rect(20, -160, 20, 250);
+    // p5.translate(0, -180);
+    // p5.rect(-50, 20, 90, 20);
+    // p5.translate(-30, 0);
+    // p5.rect(-23, -6, 20, 45);
+    // p5.pop();
 
     ///miscare biti
     bitDeInformatie.style("color", "white");

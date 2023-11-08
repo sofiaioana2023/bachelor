@@ -681,3 +681,65 @@ a:hover{
   border: 2px solid #000;
   box-shadow: 0 45px 65px rgba(0,0,0,0.50), 0 35px 22px rgba(0,0,0,0.16);
 }
+.phoneButton{
+  display: inline-block;
+  height: 300px;
+  width:750px;
+  
+}
+.positionedButton{
+  position: relative;
+  bottom: 285px;
+  left: 320px;
+  background-color: #0a0b0b;
+
+
+}
+.positionedButton:hover{
+  background-color: #EAB142;
+}
+.mapButtons{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  margin: 550px 1000px 0px 0px;
+  
+}
+.positionedButton1{
+  position: relative;
+  bottom: 430px;
+  left: 50px;
+  background-color: #b4e5e5;
+
+
+}
+.positionedButton1:hover{
+  background-color: #EAB142;
+}
+.positionedButton2{
+  position: relative;
+  bottom: 295px;
+  left: 100px;
+  background-color: #868fd3;
+
+
+}
+.positionedButton2:hover{
+  background-color: #EAB142;
+}
+.positionedButton3{
+  position: relative;
+  bottom: 285px;
+  left: 200px;
+  background-color: #bf8ab0;
+
+
+}
+.positionedButton3:hover{
+  background-color: #EAB142;
+}
+.time{
+  position:relative;
+ bottom:1050px;
+ left:450px;
+}

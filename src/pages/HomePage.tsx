@@ -18,17 +18,17 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+export const handleAplicatie = () => {
+  window.location.href = "/application";
+};
+export const handleQuiz = () => {
+  window.location.href = "/quiz";
+};
+export const handleCurs = () => {
+  window.location.href = "/lecture";
+};
 
 const Home = () => {
-  const handleAplicatie = () => {
-    window.location.href = "/application";
-  };
-  const handleQuiz = () => {
-    window.location.href = "/quiz";
-  };
-  const handleCurs = () => {
-    window.location.href = "/lecture";
-  };
   return (
     <Layout>
       <div className="containerColumnForHomePage">
