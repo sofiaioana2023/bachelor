@@ -15,8 +15,10 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
+  const { t } = useTranslation();
   const email = "monica.borda@com.utcluj.ro";
   const goToEmail = () => {
     window.location.href = `mailTo:${email}`;
@@ -33,32 +35,42 @@ const About = () => {
         >
           <Box className="continutAbout">
             <Typography variant="h6">
-              <span style={{ marginLeft: "20px" }}></span>Această aplicație este
-              destinată studenților din cadrul Academiei Forțelor Terestre
-              "Nicolae Bălcescu” din Sibiu, de la programul de studii intitulat
-              „Inginerie și management în domeniul comunicațiilor militare”
-              pentru a fi utilizată atât ca suport teoretic, cât și practic la
-              disciplina <b>„Teoria Transmiterii Informației”</b>, curs susținut
-              <b> de către prof. univ. dr. ing. Monica Borda Elena</b> a cărei
-              dăruire didactică a contribuit la realizarea acestui instrument
-              educativ.
+              <span style={{ marginLeft: "20px" }}></span>
+              {t(
+                "Această aplicație este destinată studenților din cadrul Academiei Forțelor Terestre Nicolae Bălcescu din Sibiu, de la programul de studii intitulat Inginerie și management în domeniul comunicațiilor militare pentru a fi utilizată atât ca suport teoretic, cât și practic la disciplina"
+              )}
+              <b>„{t("Teoria Transmiterii Informației")}”</b>,
+              {t("curs susținut")}
+              <b>
+                {" "}
+                {t("de către prof. univ. dr. ing. Monica Borda Elena")}
+              </b>{" "}
+              {t(
+                "a cărei dăruire didactică a contribuit la realizarea acestui instrument educativ."
+              )}
             </Typography>
             <Typography variant="h6">
-              <span style={{ marginLeft: "20px" }}></span>Aplicația în sine nu
-              reprezintă decât o ilustrare sumară a implementării Codului
-              Hamming ciclic corector de o eroare în scopul de a fi cât mai
-              accesibilă studentului. Acesta din urmă poate naviga către trei
-              secțiuni : <b>„Curs” </b> pentru a dobândi cunoștintele
-              fundamentale referitoare la codul vizat,{" "}
-              <b>„Lucrare de laborator”</b> în cadrul căreia utilizatorul poate
-              simula atât procesul de codare, cât și decodarea prin regiștrii de
-              deplasare cu reacție cu sumatoare modulo-2 exterioare. A treia
-              secțiune denumită <b>„Teste”</b>, oferă studentului ocazia de a-și
-              evalua noțiunile asimilate.
+              <span style={{ marginLeft: "20px" }}></span>
+              {t(
+                "Aplicația în sine nu reprezintă decât o ilustrare sumară a implementării Codului Hamming ciclic corector de o eroare în scopul de a fi cât mai accesibilă studentului. Acesta din urmă poate naviga către trei secțiuni :"
+              )}
+              <b>„{t("Curs")}” </b>{" "}
+              {t(
+                "pentru a dobândi cunoștintele fundamentale referitoare la codul vizat,"
+              )}
+              <b>„{t("Lucrare de laborator")}”</b>{" "}
+              {t(
+                "în cadrul căreia utilizatorul poate simula atât procesul de codare, cât și decodarea prin regiștrii de deplasare cu reacție cu sumatoare modulo-2 exterioare. A treia secțiune denumită"
+              )}{" "}
+              <b>„{t("Teste")}”</b>,{" "}
+              {t(
+                "oferă studentului ocazia de a-și evalua noțiunile asimilate."
+              )}
             </Typography>
             <Typography variant="h6">
-              Pentru o înțelegere mai profundă a conceptelor enunțate în cadrul
-              aplicației, se sugerează lecturarea cărții:
+              {t(
+                "Pentru o înțelegere mai profundă a conceptelor enunțate în cadrul aplicației, se sugerează lecturarea cărții:"
+              )}
             </Typography>
             <div
               style={{
@@ -76,11 +88,11 @@ const About = () => {
               <span style={{ marginLeft: "20px" }}></span>
               <em>
                 <b>
-                  "Rod a 20 de ani de activitate didactică și științifică,
-                  lucrarea constituie prima parte a cursului de Teoria
-                  Transmiterii Informației ținut la Universitatea Tehnică din
-                  Cluj Napoca și cuprinde principiile de bază ale teoriei
-                  informației și codării."
+                  "
+                  {t(
+                    "Rod a 20 de ani de activitate didactică și științifică, lucrarea constituie prima parte a cursului de Teoria Transmiterii Informației ținut la Universitatea Tehnică din Cluj Napoca și cuprinde principiile de bază ale teorie informației și codării."
+                  )}
+                  "
                 </b>
               </em>
             </Typography>
@@ -92,7 +104,7 @@ const About = () => {
               }}
             >
               <Typography variant="h6" style={{ marginBottom: "15px" }}>
-                <b>- Prof. univ. dr. ing. Monica Borda Elena</b>
+                <b>- {t("Prof. univ. dr. ing.")} Monica Borda Elena</b>
               </Typography>
             </div>
           </Box>
@@ -128,11 +140,11 @@ const About = () => {
               <CardContent>
                 <Typography
                   gutterBottom
-                  variant="h5"
                   component="div"
                   style={{ textAlign: "center" }}
+                  variant="h5"
                 >
-                  <b>Prof. univ. dr. ing. BORDA Monica Elena </b>
+                  <b>{t("Prof. univ. dr. ing.")} BORDA Monica Elena </b>
                 </Typography>
                 <Typography
                   variant="body2"
@@ -145,6 +157,7 @@ const About = () => {
                     </a>
 
                     <Typography
+                      variant={"h6"}
                       style={{ display: "flex", flexDirection: "column" }}
                     >
                       <Box style={{ display: "flex" }}>
@@ -156,7 +169,7 @@ const About = () => {
 
                       <Box style={{ display: "flex" }}>
                         <PermIdentityIcon style={{ marginRight: "4px" }} />
-                        <Typography>
+                        <Typography variant={"h6"}>
                           <a href="https://doctorat.utcluj.ro/cvs/AuH6iyNbFp2DALh8KpNePUqxLsAmc1SNvATgdBQW.pdf">
                             Curriculum vitae
                           </a>

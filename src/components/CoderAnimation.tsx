@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { labContext } from "../helpers/Contexts";
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 import { MySketch } from "../componentsLab/MySketck";
@@ -12,7 +12,10 @@ import slide6 from "../icons/tact5.png";
 import slide7 from "../icons/tact6.png";
 import slide8 from "../icons/tact7.png";
 import decoderschema from "../icons/decoderschema.png";
+import { useTranslation } from "react-i18next";
+
 const CoderAnimation = () => {
+  const { t } = useTranslation();
   const { labState, setLabState } = React.useContext(labContext);
   const [userInput, isUserInput] = React.useState<boolean>(false);
   const [currentStep, setCurrentStep] = React.useState(0);
@@ -24,6 +27,11 @@ const CoderAnimation = () => {
   const [errorWord, setErrorWord] = React.useState<number[]>([]);
   const [wrongInformation, setWrongInformation] = React.useState<string>("");
   const [isDecoding, setisDecoding] = React.useState<boolean>(false);
+  const [isDecodingStarted, setIsDecodingStarted] =
+    React.useState<boolean>(false);
+  const [k, setK] = useState(1);
+  const [isStareFixaGasita, setIsStareFixaGasita] =
+    React.useState<boolean>(false);
   const slides = [
     slide1,
     slide2,
@@ -34,23 +42,27 @@ const CoderAnimation = () => {
     slide7,
     slide8,
   ];
-
-  let cuvantdecodreceptionatsicorectat = [];
+  // VARIABILE PT DECODARE
+  let cuvantdecodreceptionatsicorectat: number[] = []; //ecran
   let pozeinr = 0;
-  let celuleDecodor = [0, 0, 0];
+  let C0d = 0; //ecran
+  let C1d = 0; //ecran
+  let C2d = 0; //ecran
+  let celuleDecodor = [C0d, C1d, C2d];
   let contorStareFixaGasita = 0;
-  let C0d = celuleDecodor[2];
-  let C1d = celuleDecodor[1];
-  let C2d = celuleDecodor[0];
-  const registruStarefixa = [0, 0, 1];
+
   let celuleDecodor7: number[] = [];
   let contorStareFixa = 8;
-  let S4 = 0;
-  let S5 = 0;
+  let S4 = 0; //ecran
+  let S5 = 0; //ecran
+  let tactDecoderDom = 0; //ecran
+  let tactDecoderDomEroare = 0;
+
+  //VARIABILE PT CODARE
   let C2 = 0; // ecran
   let C1 = 0; // ecran
   let C0 = 0; // ecran
-  console.log(`${C2}, ${C1}, ${C0}`);
+
   let valoareBitRedundant = 0;
   let celuleRegistru = [C2, C1, C0];
   const informatie = informationByUser.split("").map(Number);
@@ -64,9 +76,11 @@ const CoderAnimation = () => {
   let tactm = "4";
   let tactCanvas = 0;
   let copieCuvantCodat = " ";
-  // cuvantEronat = cuvantDeCod.split("").map(Number);
-  let cuvantEronat: number[] = [];
 
+  let cuvantEronat: number[] = [];
+  cuvantEronat = cuvantDeCod.split("").map(Number);
+
+  // PROPS PENTRU CANVAS
   const [wrapProps, setWrapProps] = React.useState<{
     bitDeInfo?: number;
     celuleRegistru?: number[];
@@ -81,6 +95,20 @@ const CoderAnimation = () => {
     transmissionEnded: boolean;
     positionErrorByUser: string;
     errorWord: number[];
+    tactDecoderDom: number;
+    celuleDecodor: (string | number)[];
+    S4: number;
+    S5: number;
+    contorStareFixaGasita: number;
+    cuvantdecodreceptionatsicorectat: number[];
+    celuleDecodor7: number[];
+    tactDecoderDomEroare: number;
+    r: number[];
+    pozeinr: number;
+    C01: number;
+    C1d: number;
+    C2d: number;
+    contorStareFixa?: number;
   }>({
     sumator1: "1",
     sumator2: "1",
@@ -95,7 +123,22 @@ const CoderAnimation = () => {
     transmissionEnded: false,
     positionErrorByUser: "",
     errorWord: [],
+    tactDecoderDom: 1,
+    celuleDecodor: [],
+    S4: 0,
+    S5: 0,
+    contorStareFixaGasita: 0,
+    cuvantdecodreceptionatsicorectat: [],
+    celuleDecodor7: [],
+    tactDecoderDomEroare: 1,
+    r: [],
+    pozeinr: 0,
+    C01: 0,
+    C1d: 0,
+    C2d: 0,
   });
+
+  // ALGORITM CODARE
 
   function* generator(i: number) {
     yield firstFor(i);
@@ -148,7 +191,7 @@ const CoderAnimation = () => {
   };
 
   const secondFor = (k: number) => {
-    console.log(stareRDRLam);
+    // console.log(stareRDRLam);
     tact = `Coderul este la tactul ${Number(tactm) + k}`;
     tactCanvas = Number(tactm) + k;
     setTactDOM(tactCanvas);
@@ -188,7 +231,7 @@ const CoderAnimation = () => {
     errorWord[errorWord.length - 1 - Number(positionErrorByUser)] =
       errorWord[errorWord.length - 1 - Number(positionErrorByUser)] ^ 1;
     auxErrorWord = errorWord;
-    console.log(` cuvant eronat are valoarea ${auxErrorWord}`);
+    // console.log(` cuvant eronat are valoarea ${auxErrorWord}`);
   }
   const gen = React.useMemo(() => generator(1), [userInput, informationByUser]);
 
@@ -223,11 +266,7 @@ const CoderAnimation = () => {
       gen.next();
     }
   };
-  const handleStartTransmission = () => {
-    if (tactCanvas === 7) {
-      console.log("transmisie");
-    }
-  };
+
   const handlePositionErrorInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPositionErrorByUser(e.target.value);
     setWrapProps({
@@ -236,7 +275,7 @@ const CoderAnimation = () => {
     });
   };
 
-  console.log(`eroarea este pe pozitiz ${positionErrorByUser}`);
+  // console.log(`eroarea este pe pozitie ${positionErrorByUser}`);
 
   useEffect(() => {
     if (tactDOM === 7) {
@@ -247,10 +286,33 @@ const CoderAnimation = () => {
       }, 4000);
     }
   }, [tactDOM]);
-  ///decoder
-  let r = errorWord;
 
-  for (let i = 1; i <= 7; i++) {
+  //ALGORITM DECODARE
+
+  let r = errorWord;
+  // console.log(`cuvantul eronat arata asa : ${errorWord}`);
+  function* generatorDecoder(i: number) {
+    yield firstForDecoder(i);
+    yield firstForDecoder(i + 1);
+    yield firstForDecoder(i + 2);
+    yield firstForDecoder(i + 3);
+    yield firstForDecoder(i + 4);
+    yield firstForDecoder(i + 5);
+    yield firstForDecoder(i + 6);
+    if (k) {
+      yield secondForDecoder(wrapProps.contorStareFixa || 0);
+      yield secondForDecoder(wrapProps.contorStareFixa || 0 + 1);
+      yield secondForDecoder(wrapProps.contorStareFixa || 0 + 2);
+      yield secondForDecoder(wrapProps.contorStareFixa || 0 + 3);
+      yield secondForDecoder(wrapProps.contorStareFixa || 0 + 4);
+      yield secondForDecoder(wrapProps.contorStareFixa || 0 + 5);
+      yield secondForDecoder(wrapProps.contorStareFixa || 0 + 6);
+    }
+  }
+
+  const firstForDecoder = (i: number) => {
+    console.log(i, "000000");
+    tactDecoderDom = i;
     C0d = C1d;
     C1d = C2d;
     S4 = celuleDecodor[2] ^ celuleDecodor[1];
@@ -258,60 +320,115 @@ const CoderAnimation = () => {
     C2d = S5;
     celuleDecodor.unshift(S5);
     celuleDecodor.pop();
-    console.log(` ${i} ${celuleDecodor}`);
+    console.log(celuleDecodor, "=====");
+    // console.log(`celule decodor pana la tactiul 7 sunt ${celuleDecodor}`);
     if (i === 7) {
+      console.log("meet,", celuleDecodor);
       celuleDecodor7 = celuleDecodor;
     }
-  }
-  let k = 1;
 
-  if (
-    celuleDecodor7[0] === 0 &&
-    celuleDecodor7[1] === 0 &&
-    celuleDecodor7[2] === 0
-  ) {
-    console.log("nu sunt erori");
-  }
-  if (
-    celuleDecodor7[0] === 0 &&
-    celuleDecodor7[1] === 0 &&
-    celuleDecodor7[2] === 1
-  ) {
-    console.log("s-a identificat starea fixa");
-  } else {
-    console.log("se cauta starea fixa");
-    for (contorStareFixa = 8; contorStareFixa <= 14; contorStareFixa++) {
-      C0d = C1d;
-      C1d = C2d;
-      S4 = celuleDecodor7[2] ^ celuleDecodor7[1];
-      S5 = S4;
-      C2d = S5;
-      celuleDecodor7.unshift(S5);
-      celuleDecodor7.pop();
-      if (k) {
-        console.log(
-          `la tactul ${contorStareFixa} registrul contine val ${celuleDecodor7}`
-        );
-      }
-      if (
-        celuleDecodor7[0] === 0 &&
-        celuleDecodor7[1] === 0 &&
-        celuleDecodor7[2] === 1
-      ) {
-        k = 0;
-        contorStareFixaGasita = contorStareFixa;
-        pozeinr = 13 - contorStareFixaGasita;
-        r[r.length - pozeinr - 1] = r[r.length - pozeinr - 1] ^ 1;
-        cuvantdecodreceptionatsicorectat = r;
-        console.log(
-          `tact stare fixa ${contorStareFixaGasita} si secventa r dupa corectie ${cuvantdecodreceptionatsicorectat}`
-        );
-      }
-    }
-  }
-  const decoding = () => {
-    setisDecoding(true);
+    setWrapProps((prev) => {
+      return {
+        ...prev,
+        celuleDecodor,
+        tactDecoderDom,
+        celuleDecodor7,
+        S4,
+        S5,
+        C0d,
+        C1d,
+        C2d,
+      };
+    });
+
+    return {
+      celuleDecodor,
+      tactDecoderDom,
+      celuleDecodor7,
+      S4,
+      S5,
+      C0d,
+      C1d,
+      C2d,
+    };
   };
+
+  const secondForDecoder = (contorStareFixa: number) => {
+    tactDecoderDomEroare = contorStareFixa;
+    tactDecoderDom = tactDecoderDomEroare;
+
+    C0d = C1d;
+    C1d = C2d;
+    S4 = celuleDecodor7[2] ^ celuleDecodor7[1];
+    S5 = S4;
+    C2d = S5;
+    celuleDecodor7.unshift(S5);
+    celuleDecodor7.pop();
+    // if (k) {
+    //   console.log(
+    //     `la tactul ${contorStareFixa} registrul contine val ${celuleDecodor7}`
+    //   );
+    // }
+    if (
+      celuleDecodor7[0] === 0 &&
+      celuleDecodor7[1] === 0 &&
+      celuleDecodor7[2] === 1
+    ) {
+      setIsStareFixaGasita(true);
+      setK(0);
+      contorStareFixaGasita = contorStareFixa;
+      pozeinr = 13 - contorStareFixaGasita;
+      r[r.length - pozeinr - 1] = r[r.length - pozeinr - 1] ^ 1;
+      cuvantdecodreceptionatsicorectat = r;
+    }
+    setWrapProps((prev) => {
+      return {
+        ...prev,
+        celuleDecodor7,
+        tactDecoderDomEroare,
+        S4,
+        S5,
+        contorStareFixaGasita,
+        tactDecoderDom,
+        contorStareFixa,
+        cuvantdecodreceptionatsicorectat,
+        r,
+        pozeinr,
+      };
+    });
+
+    return {
+      celuleDecodor7,
+      tactDecoderDomEroare,
+      S4,
+      S5,
+      contorStareFixaGasita,
+      tactDecoderDom,
+      contorStareFixa,
+      cuvantdecodreceptionatsicorectat,
+      r,
+      pozeinr,
+    };
+  };
+
+  const genDecoder = React.useMemo(() => generatorDecoder(1), []);
+
+  const decoding = () => {
+    console.log(
+      "decoding...tact ceva:",
+      wrapProps.contorStareFixa,
+      " si stareFixaGasita:",
+      wrapProps.contorStareFixaGasita,
+      "celule:",
+      wrapProps.celuleDecodor7,
+      "---",
+      k
+    );
+    genDecoder.next();
+    setisDecoding(true);
+    setIsDecodingStarted(true);
+  };
+
   return (
     <div>
       <Box
@@ -343,18 +460,18 @@ const CoderAnimation = () => {
           <form>
             {tactDOM === 7 && !wrapProps.transmissionEnded ? (
               <div className="transmisia">
-                <b>A început transmisia</b>
+                <b>{t("A început transmisia")}</b>
               </div>
             ) : wrapProps.transmissionEnded ? (
               <div className="transmisia">
                 <b>
-                  S-a terminat <del>transmisia</del>
+                  "S-a terminat" <del>"transmisia"</del>
                 </b>
               </div>
             ) : (
               <>
                 <label className="labelBiti">
-                  Introdu biții de informație :
+                  {t("Introdu biții de informație")} :
                 </label>
                 <input
                   type="text"
@@ -387,15 +504,26 @@ const CoderAnimation = () => {
               onClick={handleStartClick}
             >
               {tactDOM === 0 ? (
-                "START"
+                <div> {t("START")}</div>
               ) : tactDOM <= 7 && !wrapProps.transmissionEnded ? (
                 `Tact  ${tactDOM}`
               ) : (
-                <div onClick={decoding}>Începe decodarea</div>
+                <div onClick={decoding}>
+                  {isDecoding ? (
+                    isDecodingStarted ? (
+                      <div>Tact Decoder {wrapProps.tactDecoderDom}</div>
+                    ) : (
+                      <p>"START"</p>
+                    )
+                  ) : (
+                    <div>{t("Începe decodarea")}</div>
+                  )}
+                </div>
               )}
             </Button>
           )}
         </div>
+
         {tactDOM === 7 && wrapProps.transmissionEnded && (
           <form
             style={{
@@ -406,17 +534,32 @@ const CoderAnimation = () => {
             }}
           >
             <label className="labelBiti">
-              Introdu poziția bitului din intervalul [0,6] care a fost eronat pe
-              timpul transmisiei :
+              {isDecoding ? (
+                ""
+              ) : (
+                <div>
+                  {t(
+                    "Introdu poziția bitului din intervalul [0,6] care a fost eronat pe timpul transmisiei "
+                  )}
+                </div>
+              )}
             </label>
-            <input
-              type="text"
-              // disabled={isInputDisabled}
-              placeholder="0123456"
-              value={positionErrorByUser}
-              onChange={handlePositionErrorInput}
-              className="inputBiti"
-            />
+            {isDecoding ? (
+              isStareFixaGasita ? (
+                "stare gasita"
+              ) : (
+                "nu s-a gasit starea"
+              )
+            ) : (
+              <input
+                type="text"
+                // disabled={isInputDisabled}
+                placeholder="0123456"
+                value={positionErrorByUser}
+                onChange={handlePositionErrorInput}
+                className="inputBiti"
+              />
+            )}
           </form>
         )}
       </Box>
@@ -449,7 +592,7 @@ const CoderAnimation = () => {
           }}
           onClick={() => setLabState("meniu")}
         >
-          BACK
+          {t("BACK")}
         </Button>
         <Button
           variant="contained"
@@ -466,9 +609,10 @@ const CoderAnimation = () => {
           }}
           onClick={() => setLabState("end")}
         >
-          NEXT
+          {t("NEXT")}
         </Button>
       </div>
+      <p>{wrapProps.celuleDecodor}</p>
     </div>
   );
 };

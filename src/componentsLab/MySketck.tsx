@@ -36,8 +36,8 @@ export function MySketch(p5: any, props: any) {
   let destinatar = p5.createP("DESTINATAR");
   let positionErrorByUserCanvas = p5.createP(positionErrorByUser);
   let receivedWordWithError = p5.createP(errorWord);
-  console.log(`cuvantul eronat in canvas este ${receivedWordWithError}`);
-  console.log(`pozitie eroare in canvas ${positionErrorByUserCanvas}`);
+  // console.log(`cuvantul eronat in canvas este ${receivedWordWithError}`);
+  // console.log(`pozitie eroare in canvas ${positionErrorByUserCanvas}`);
   let informatieIntrodusaDeUser = p5.createP(informationByUser);
   let informatie = p5.createP("a6a5a4a3");
   let informatieCODATA = p5.createP("a6a5a4a3a2a1a0");

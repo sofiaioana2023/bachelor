@@ -19,6 +19,8 @@ import {
   Select,
   styled,
 } from "@mui/material";
+import { changeLanguage } from "i18next";
+import { useTranslation } from "react-i18next";
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     borderRadius: 4,
@@ -56,6 +58,12 @@ const Layout = ({ children }: LayoutProps) => {
   const handleLanguage = (e: { target: { value: string } }) => {
     setLanguage(e.target.value);
   };
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <div className="layoutContainer">
       <header>
@@ -66,14 +74,17 @@ const Layout = ({ children }: LayoutProps) => {
               alt="TTI"
               style={{ width: "48px", height: "48px" }}
             />
-            <p style={{ padding: "3px 2px", fontSize: "18px" }}>
-              Information Transmission Theory
+            <p
+              style={{
+                padding: "3px 2px",
+                fontSize: "25px",
+                textShadow: "1px 1px 1px yellow",
+              }}
+            >
+              {t("Information Transmission Theory")}
             </p>
           </div>
           <div className="links">
-            <span className="iconMenu">
-              <Home />
-            </span>
             <NavLink
               to="/"
               className="navItem"
@@ -86,11 +97,14 @@ const Layout = ({ children }: LayoutProps) => {
                 },
               })}
             >
-              Home
+              <li className="navItem">
+                <span className="iconMenu">
+                  <Home />
+                </span>
+                <div>{t("Home")}</div>
+              </li>
             </NavLink>
-            <span className="iconMenu">
-              <LightbulbIcon />
-            </span>
+
             <NavLink
               to="/lecture"
               className="navItem"
@@ -103,11 +117,14 @@ const Layout = ({ children }: LayoutProps) => {
                 },
               })}
             >
-              Lecture
+              <li className="navItem">
+                <span className="iconMenu">
+                  <LightbulbIcon />
+                </span>
+                <div>{t("Lecture")}</div>
+              </li>
             </NavLink>
-            <span className="iconMenu">
-              <EditNoteIcon />
-            </span>
+
             <NavLink
               to="/notes"
               className="navItem"
@@ -120,11 +137,14 @@ const Layout = ({ children }: LayoutProps) => {
                 },
               })}
             >
-              Notes
+              <li className="navItem">
+                <span className="iconMenu">
+                  <EditNoteIcon />
+                </span>
+                <div>{t("Notes")}</div>
+              </li>
             </NavLink>
-            <span className="iconMenu">
-              <SchoolIcon />
-            </span>
+
             <NavLink
               to="/application"
               className="navItem"
@@ -137,11 +157,14 @@ const Layout = ({ children }: LayoutProps) => {
                 },
               })}
             >
-              Application
+              <li className="navItem">
+                <span className="iconMenu">
+                  <SchoolIcon />
+                </span>
+                <div>{t("Application")}</div>
+              </li>
             </NavLink>
-            <span className="iconMenu">
-              <PsychologyAltIcon />
-            </span>
+
             <NavLink
               to="/quiz"
               className="navItem"
@@ -154,11 +177,14 @@ const Layout = ({ children }: LayoutProps) => {
                 },
               })}
             >
-              Quiz
+              <li className="navItem">
+                <span className="iconMenu">
+                  <PsychologyAltIcon />
+                </span>
+                <div>{t("Quiz")}</div>
+              </li>
             </NavLink>
-            <span className="iconMenu">
-              <InfoIcon />
-            </span>
+
             <NavLink
               to="/about"
               className="navItem"
@@ -171,46 +197,53 @@ const Layout = ({ children }: LayoutProps) => {
                 },
               })}
             >
-              About
+              <li className="navItem">
+                <span className="iconMenu">
+                  <InfoIcon />
+                </span>
+                <div>{t("About")}</div>
+              </li>
             </NavLink>
-            <span className="iconMenu">
-              <LanguageIcon />
-            </span>
-            <FormControl sx={{ m: 1 }} variant="outlined">
-              <InputLabel id="demo-customized-select-label"></InputLabel>
-              <Select
-                labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                value={language}
-                onChange={handleLanguage}
-                input={<BootstrapInput />}
-              >
-                <MenuItem value={""}>
-                  <img
-                    src={iconRO}
-                    alt="RO"
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                  <b>RO</b>
-                </MenuItem>
-                <MenuItem value={""}>
-                  <img
-                    src={iconEN}
-                    alt="EN"
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                  <b>EN</b>
-                </MenuItem>
-                <MenuItem value={""}>
-                  <img
-                    src={iconFR}
-                    alt="FR"
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                  <b>FR</b>
-                </MenuItem>
-              </Select>
-            </FormControl>
+
+            <div className="relativeLanguageSelector">
+              <FormControl sx={{ m: 1, width: "50px" }} variant="outlined">
+                <Select
+                  labelId="demo-customized-select-label"
+                  id="demo-customized-select"
+                  value={language}
+                  onChange={handleLanguage}
+                  input={<BootstrapInput />}
+                >
+                  <MenuItem value={""} onClick={() => changeLanguage("ro")}>
+                    <img
+                      src={iconRO}
+                      alt="RO"
+                      style={{ width: "24px", height: "24px" }}
+                    />
+                    <b>RO</b>
+                  </MenuItem>
+                  <MenuItem value={""} onClick={() => changeLanguage("en")}>
+                    <img
+                      src={iconEN}
+                      alt="EN"
+                      style={{ width: "24px", height: "24px" }}
+                    />
+                    <b>EN</b>
+                  </MenuItem>
+                  <MenuItem value={""} onClick={() => changeLanguage("fr")}>
+                    <img
+                      src={iconFR}
+                      alt="FR"
+                      style={{ width: "24px", height: "24px" }}
+                    />
+                    <b>FR</b>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+              <div style={{ marginRight: "10px" }}>
+                <LanguageIcon />
+              </div>
+            </div>
           </div>
         </nav>
       </header>

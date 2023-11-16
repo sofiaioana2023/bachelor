@@ -3,9 +3,11 @@ import React, { useContext } from "react";
 import { labContext } from "../helpers/Contexts";
 import alegepolinom from "../icons/alegepolinom.png";
 import alegepolinompoza from "../icons/alegepolinompoza.png";
+import { useTranslation } from "react-i18next";
 
 const AlegePol = () => {
   const { setLabState, labState } = useContext(labContext);
+  const { t } = useTranslation();
   return (
     <div className="alegePolinom">
       {/* <div>
@@ -139,7 +141,7 @@ const AlegePol = () => {
           }}
           onClick={() => setLabState("meniu")}
         >
-          BACK
+          {t("BACK")}
         </Button>
       </div>
     </div>

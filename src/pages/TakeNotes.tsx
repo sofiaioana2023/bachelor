@@ -10,10 +10,12 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import NoteComponent from "../components/NoteComponent";
+import { useTranslation } from "react-i18next";
 
 const TakeNotes = () => {
   const [areColorsHidden, setAreColorsHidden] = useState(true);
   const [selectedColor, setSelectedColor] = useState(""); // Track the selected color
+  const { t } = useTranslation();
 
   const toggleColors = () => {
     setAreColorsHidden(!areColorsHidden);
@@ -33,7 +35,9 @@ const TakeNotes = () => {
           style={{ margin: "100px 0px 50px 0px" }}
         >
           <b>
-            Scrie-ți propriile notițe pentru un proces de învățare mai organizat
+            {t(
+              "Scrie-ți propriile notițe pentru un proces de învățare mai organizat"
+            )}
           </b>
         </Typography>
 

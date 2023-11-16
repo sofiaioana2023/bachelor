@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import SaveIcon from "@mui/icons-material/Save";
+import { useTranslation } from "react-i18next";
 
 const NoteComponent: React.FC<{ selectedColor: string }> = ({
   selectedColor,
@@ -10,6 +11,18 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
   const [content, setContent] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [isEditMode, setIsEditMode] = useState(true);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const savedTitle = localStorage.getItem("savedTitle");
+    const savedContent = localStorage.getItem("savedContent");
+
+    if (savedTitle && savedContent) {
+      setTitle(savedTitle);
+      setContent(savedContent);
+      setIsSaved(true);
+    }
+  }, []);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -22,6 +35,8 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
   const handleSave = () => {
     setIsSaved(true);
     setIsEditMode(false);
+    localStorage.setItem("savedTitle", title);
+    localStorage.setItem("savedContent", content);
   };
 
   const handleDelete = () => {
@@ -29,6 +44,8 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
     setContent("");
     setIsSaved(false);
     setIsEditMode(true);
+    localStorage.removeItem("savedTitle");
+    localStorage.removeItem("savedContent");
   };
 
   const noteStyle = {
@@ -61,7 +78,7 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
           {isEditMode ? (
             <input
               type="text"
-              placeholder="Title"
+              placeholder="..."
               value={title}
               onChange={handleTitleChange}
               style={inputStyle}
@@ -74,7 +91,7 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
 
           {isEditMode ? (
             <textarea
-              placeholder="Content"
+              placeholder="..."
               value={content}
               onChange={handleContentChange}
               style={textareaStyle}
@@ -92,7 +109,7 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
             }}
             onClick={handleSave}
           >
-            <b>Save</b>
+            <b>{t("Save")}</b>
             <SaveIcon style={{ color: "#000" }} />
           </Button>
         </>
@@ -118,7 +135,7 @@ const NoteComponent: React.FC<{ selectedColor: string }> = ({
           }}
           onClick={handleDelete}
         >
-          <b>Delete</b> <DeleteSweepIcon style={{ color: "#000" }} />
+          <b>{t("Delete")}</b> <DeleteSweepIcon style={{ color: "#000" }} />
         </Button>
       )}
     </div>

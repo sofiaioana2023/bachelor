@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import About from "./pages/About";
@@ -9,9 +9,11 @@ import Lecture from "./pages/Lecture";
 import HomePage from "./pages/HomePage";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { Typography } from "@mui/material";
+import { labContext } from "./helpers/Contexts";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const { userName } = useContext(labContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -26,14 +28,18 @@ function App() {
           <PuffLoader color="aliceblue" size={400} speedMultiplier={2} />
         </div>
       ) : (
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/lecture" element={<Lecture />} />
-          <Route path="/application" element={<Application />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/notes" element={<TakeNotes />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
+        <>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/lecture" element={<Lecture />} />
+            <Route path="/application" element={<Application />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/notes" element={<TakeNotes />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+
+          {/* Your context provider closing tag */}
+        </>
       )}
     </div>
   );

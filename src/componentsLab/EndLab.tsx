@@ -6,11 +6,13 @@ import MAP from "../icons/MAP.png";
 import { handleAplicatie } from "../pages/HomePage";
 import { handleCurs } from "../pages/HomePage";
 import { handleQuiz } from "../pages/HomePage";
+import { useTranslation } from "react-i18next";
 const EndLab = () => {
   const { labState, setLabState, userName, setUserName } =
     useContext(labContext);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [time, setTime] = useState<string>(new Date().toLocaleTimeString());
+  const { t } = useTranslation();
   const refreshTime = () => {
     setTime(new Date().toLocaleTimeString());
   };
@@ -43,7 +45,10 @@ const EndLab = () => {
           variant="h2"
           style={{ margin: "0px 0px 150px 0px", textAlign: "center" }}
         >
-          <b> Felicitări {userName}, ai ajuns la finalul laboratorului!</b>
+          <b>
+            {t("Felicitări")} {userName},
+            {t("ai ajuns la finalul laboratorului!")}
+          </b>
         </Typography>
         <div className="phoneButton">
           <img src={phone} />
@@ -72,7 +77,7 @@ const EndLab = () => {
 
         <div className="mapButtons">
           <img src={MAP} style={{ height: "400px", width: "500px" }} />
-          <a title="Quiz">
+          <a title={t("Quiz")}>
             <button
               className={
                 isHovered ? "positionedButton1:hover" : "positionedButton1"
@@ -92,7 +97,7 @@ const EndLab = () => {
               onClick={handleQuiz}
             ></button>
           </a>
-          <a title="Curs">
+          <a title={t("Curs")}>
             <button
               className={
                 isHovered ? "positionedButton2:hover" : "positionedButton2"
@@ -112,7 +117,7 @@ const EndLab = () => {
               onClick={handleCurs}
             ></button>
           </a>
-          <a title="Lucrare de laborator">
+          <a title={t("Lucrare de laborator")}>
             <button
               className={
                 isHovered ? "positionedButton3:hover" : "positionedButton3"

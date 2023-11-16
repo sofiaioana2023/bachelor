@@ -9,8 +9,10 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import title from "../icons/title.png";
+import { useTranslation } from "react-i18next";
 
 const Meniu = () => {
+  const { t } = useTranslation();
   const { setLabState, labState, userName, setUserName } =
     useContext(labContext);
 
@@ -48,13 +50,25 @@ const Meniu = () => {
 
       <div className="submenu">
         <ThemeProvider theme={theme}>
+          <div
+            style={{
+              letterSpacing: "3px",
+              fontSize: "35px",
+            }}
+          >
+            <b>{t("Enter name:")}</b>
+          </div>
           <TextField
-            label="Enter name"
             color="primary"
             focused
             value={userName}
             onChange={handleUserName}
-            style={{ width: "400px", height: "80px", fontSize: "26px" }}
+            style={{
+              width: "400px",
+              height: "80px",
+              fontSize: "26px",
+              margin: "25px 0px 0px 0px",
+            }}
           />
         </ThemeProvider>
 
@@ -73,7 +87,7 @@ const Meniu = () => {
                 " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
             }}
           >
-            <b>Aspecte Teoretice</b>
+            <b>{t("Aspecte Teoretice")}</b>
           </Button>
         </Link>
         <Button
@@ -90,7 +104,7 @@ const Meniu = () => {
           }}
           onClick={() => setLabState("alegepolinom")}
         >
-          <b>Începe simularea</b>
+          <b>{t("Începe simularea")}</b>
         </Button>
         <Link to={"/about"}>
           <Button
@@ -106,7 +120,7 @@ const Meniu = () => {
                 " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
             }}
           >
-            <b>Autori</b>
+            <b>{t("Autori")}</b>
           </Button>
         </Link>
       </div>

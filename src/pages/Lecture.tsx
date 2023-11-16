@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Button, Typography } from "@mui/material";
@@ -12,19 +12,16 @@ import decodor from "../icons/decodor.png";
 import CeSuntRDR from "../components/LectureComp/CeSuntRDR";
 import CodareAlgebrica from "../components/LectureComp/CodareAlgebrica";
 import ScrollMessage from "../components/ScrollMessage";
+import { useTranslation } from "react-i18next";
 const Lecture = () => {
   const [isFlipped, setIsFlipped] = useState(Array(10).fill(false));
-  const titluri = [
-    "Codare algebrică",
-    "Ce este un registru de deplasare cu reacție (RDR) ?",
-    "Algoritm de (de)codare ciclică utilizând RDR",
-  ];
 
   const flipCard = (index: number) => {
     const newIsFlipped = [...isFlipped];
     newIsFlipped[index] = !newIsFlipped[index];
     setIsFlipped(newIsFlipped);
   };
+  const { t } = useTranslation();
 
   return (
     <Layout>
@@ -37,33 +34,40 @@ const Lecture = () => {
           }}
         >
           <b>
-            Codul Hamming ciclic corector de o eroare: algoritmul de codare și
-            decodare ciclică prin RDR cu sumatoare modulo 2 exterioare
+            {t(
+              "Codul Hamming ciclic corector de o eroare: algoritmul de codare și decodare ciclică prin RDR cu sumatoare modulo 2 exterioare"
+            )}
           </b>
         </Typography>
 
         <Typography variant="h5" style={{ marginTop: "25px" }}>
-          <span style={{ marginLeft: "25px" }}></span>Codurile ciclice
-          corectoare de o eroare, de lungime n sunt de fapt coduri Hamming
-          ciclice corectoare de o eroare cu structură sistematică. Acestea pot
-          fi comparate cu codul BCH, corector de o singură eroare (t = 1), de
-          lungime n = 2<sup>k</sup>-1, al cărui polinom generator g(x) este
-          chiar polinomul primitiv de gradul k care generează pe GF(2
-          <sup>k</sup>).
+          <span style={{ marginLeft: "25px" }}></span>
+          {t(
+            "Codurile ciclice corectoare de o eroare, de lungime n sunt de fapt coduri Hamming ciclice corectoare de o eroare cu structură sistematică. Acestea pot fi comparate cu codul BCH, corector de o singură eroare (t = 1), de lungime n = 2"
+          )}
+          <sup>k</sup>-1,{" "}
+          {t(
+            "al cărui polinom generator g(x) este chiar polinomul primitiv de gradul k care generează pe GF(2"
+          )}
+          <sup>k</sup>.
         </Typography>
         <div className="cuprinsContainer">
           <Typography variant="h4" className="cuprins">
-            <b>Cuprins</b>
+            <b>{t("Cuprins")}</b>
           </Typography>
           <ol className="titluriLecții">
             <li>
-              <a href="#CodareAlgebrica">{titluri[0]}</a>
+              <a href="#CodareAlgebrica"> {t("Codare algebrică")}</a>
             </li>
             <li>
-              <a href="#CeSuntRDR">{titluri[1]}</a>
+              <a href="#CeSuntRDR">
+                {t("Ce este un registru de deplasare cu reacție (RDR) ?")}
+              </a>
             </li>
             <li>
-              <a href="#(De)codareCiclicaPrinRDR">{titluri[2]}</a>
+              <a href="#(De)codareCiclicaPrinRDR">
+                {t("Algoritm de (de)codare ciclică utilizând RDR")}
+              </a>
             </li>
           </ol>
         </div>
@@ -106,7 +110,7 @@ const Lecture = () => {
                 marginBottom: "12px",
               }}
             >
-              <b>Dimensionare</b>
+              <b>{t("Dimensionare:")}</b>
             </Typography>
             <Typography
               style={{ color: "red", padding: "10px", fontSize: "20px" }}
@@ -129,7 +133,7 @@ const Lecture = () => {
                 </div>
                 <div className="back">
                   <h3 style={{ color: "#4d7065" }}>
-                    Lungimea cuvantului de cod
+                    {t("Lungimea cuvantului de cod")}
                   </h3>
                 </div>
               </div>
@@ -141,7 +145,7 @@ const Lecture = () => {
                   <h2 className="information">m</h2>
                 </div>
                 <div className="back">
-                  <h3 className="information">biți de informație</h3>
+                  <h3 className="information">{t("biți de informație")}</h3>
                 </div>
               </div>
               <div
@@ -152,7 +156,7 @@ const Lecture = () => {
                   <h2 className="control">k</h2>
                 </div>
                 <div className="back">
-                  <h3 className="control">biți de control</h3>
+                  <h3 className="control">{t("biți de control")}</h3>
                 </div>
               </div>
               <div
@@ -163,7 +167,7 @@ const Lecture = () => {
                   <h2>t = 1</h2>
                 </div>
                 <div className="back">
-                  <h3>corectează o singură eroare</h3>
+                  <h3>{t("corectează o singură eroare")}</h3>
                 </div>
               </div>
               <div
@@ -200,16 +204,16 @@ const Lecture = () => {
                   </h2>
                 </div>
                 <div className="back">
-                  <h3> cuvânt de cod cu structură sistematică</h3>
+                  <h3> {t("cuvânt de cod cu structură sistematică")}</h3>
                 </div>
               </div>
             </div>
           </div>
           <Typography variant="h5">
-            <span style={{ marginLeft: "25px" }}></span>Spre deosebire codurile
-            Hamming bloc, ale căror cuvinte de cod aveau structură
-            nesistematică, în cazul codurilor Hamming ciclice corectoare de o
-            eroare, forma cuvântului de cod este una sistematică.
+            <span style={{ marginLeft: "25px" }}></span>
+            {t(
+              "Spre deosebire codurile Hamming bloc, ale căror cuvinte de cod aveau structură nesistematică, în cazul codurilor Hamming ciclice corectoare de o eroare, forma cuvântului de cod este una sistematică."
+            )}
           </Typography>
           <div className="DimensionareContainer">
             <Typography
@@ -229,7 +233,7 @@ const Lecture = () => {
               }}
             >
               <b>
-                Coder cu RDR și{" "}
+                {t("Coder cu RDR și")}
                 <div
                   style={{
                     borderRadius: "50%",
@@ -254,7 +258,7 @@ const Lecture = () => {
                     +
                   </span>
                 </div>
-                exterioare
+                {t("exterioare")}
               </b>
             </Typography>
 
@@ -265,24 +269,30 @@ const Lecture = () => {
             >
               <div className="Front">
                 <h2>
-                  Ce se întâmplă pe durata primelor
-                  <span className="information"> m</span> perioade de tact?
+                  {t("Ce se întâmplă pe durata primelor")}
+                  <span className="information"> m</span>
+                  {t(" perioade de tact?")}
                 </h2>
               </div>
               <div className="Back">
                 <h3>
                   <ul className="listCoDec">
-                    <li>comutatorul K se află în poziția 1</li>
+                    <li>{t("comutatorul K se află în poziția 1")}</li>
                     <li>
-                      biții de la intrare ajung la ieșire, astfel ca{" "}
-                      <span className="information">biții de informație</span>{" "}
-                      se vor afla pe cele mai semnificative poziții în cuvântul
-                      de cod v
+                      {t("biții de la intrare ajung la ieșire, astfel ca")}{" "}
+                      <span className="information">
+                        {t("biții de informație")}
+                      </span>{" "}
+                      {t(
+                        "se vor afla pe cele mai semnificative poziții în cuvântul de cod v"
+                      )}
                     </li>
                     <li>
-                      biții de la intrare se adună prin sumatorul S<sub>2</sub>{" "}
-                      cu valorile din celulele registrului, formând în registru
-                      relații liniare
+                      {t("biții de la intrare se adună prin sumatorul")} S
+                      <sub>2</sub>{" "}
+                      {t(
+                        "cu valorile din celulele registrului, formând în registru relații liniare"
+                      )}
                     </li>
                   </ul>
                 </h3>
@@ -295,26 +305,30 @@ const Lecture = () => {
             >
               <div className="Front">
                 <h2>
-                  Ce se întâmplă pe durata următoarelor{" "}
-                  <span className="control">k</span> perioade de tact?
+                  {t("Ce se întâmplă pe durata următoarelor")}{" "}
+                  <span className="control">k</span> {t("perioade de tact?")}
                 </h2>
               </div>
               <div className="Back">
                 <h3>
                   <ul className="listCoDec">
                     <li>
-                      comutatorul K este în poziția 2, la intrare nu se vor mai
-                      afla biți
+                      {t(
+                        "comutatorul K este în poziția 2, la intrare nu se vor mai afla biți"
+                      )}
                     </li>
                     <li>
-                      în sumatorul S<sub>1</sub> se adună relațiile liniare
-                      existente în celulele registrului, obținându-se astfel la
-                      ieșire <span className="control">biții de control</span>
+                      {t("în sumatorul")} S<sub>1</sub>{" "}
+                      {t(
+                        "se adună relațiile liniare existente în celulele registrului, obținându-se astfel la ieșire "
+                      )}
+                      <span className="control">{t("biții de control")}</span>
                     </li>
                     <li>
-                      în celula C<sub>k-1</sub> se obține 0 datorită sumatorului
-                      S<sub>2</sub> care adună ieșirea sumatorului S<sub>1</sub>{" "}
-                      de două ori
+                      {t("în celula")} C<sub>k-1</sub>
+                      {t("se obține 0 datorită sumatorului S")} <sub>2</sub>{" "}
+                      {t("care adună ieșirea sumatorului")} S<sub>1</sub>{" "}
+                      {t("de două ori")}
                     </li>
                   </ul>
                 </h3>
@@ -331,13 +345,17 @@ const Lecture = () => {
             <Typography variant="h5" style={{ marginTop: "25px" }}>
               <b>
                 <PriorityHighIcon style={{ color: "red" }} />
-                Observație:
+                {t("Observație:")}
               </b>
               <span className="obs">
-                Conexiunea dintre celule și sumatorul S1 se realizează atunci
-                când valoarea coeficientului corespunzător din g(x) este 1
-                (celula C<sub>0</sub> este tot timpul conectată la sumatorul S1
-                deoarece coeficientul g<sub>0</sub> = 1.)
+                {t(
+                  "Conexiunea dintre celule și sumatorul S1 se realizează atunci când valoarea coeficientului corespunzător din g(x) este 1"
+                )}
+                ({t("celula")} C<sub>0</sub>{" "}
+                {t(
+                  "este tot timpul conectată la sumatorul S1 deoarece coeficientul"
+                )}
+                g<sub>0</sub> = 1.)
               </span>
             </Typography>
           </div>
@@ -359,7 +377,7 @@ const Lecture = () => {
               }}
             >
               <b>
-                Decoder cu RDR și{" "}
+                {t("Decoder cu RDR și")}{" "}
                 <div
                   style={{
                     borderRadius: "50%",
@@ -384,7 +402,7 @@ const Lecture = () => {
                     +
                   </span>
                 </div>
-                exterioare pentru detecția erorilor
+                {t("exterioare pentru detecția erorilor")}
               </b>
             </Typography>
             {/* <div className="flashcards"></div> */}
@@ -394,44 +412,48 @@ const Lecture = () => {
               style={{ alignSelf: "start" }}
             >
               <div className="Front">
-                <h2>Cum funcționează decoderul ?</h2>
+                <h2>{t("Cum funcționează decoderul ?")}</h2>
               </div>
               <div className="Back">
                 <h3>
                   <ul className="listCoDec">
                     <li>
-                      Starea inițială a registrului este{" "}
+                      {t("Starea inițială a registrului este")} <mark>0</mark>
+                    </li>
+                    <li>
+                      {t(
+                        "pe primele n perioade de tact secvența r se adună cu valorile selectate din registru, rezultatul se înscrie în celula"
+                      )}{" "}
+                      C<sub>k-1</sub>.
+                    </li>
+                    <li>
+                      {t("la")} <mark>{t("tactul")} n</mark> {t("se verifică")}{" "}
+                      <mark>{t("starea registrului ")}</mark>: {t("dacă este")}{" "}
+                      <mark>0</mark>
+                      {t("atunci")}{" "}
+                      <mark>{t("r este o secvență corectă")}</mark> {t("și")}{" "}
+                      <mark>{t("nu avem erori")}</mark> {t("sau")}{" "}
+                      <mark>{t("erorile sunt nedetectabile")}</mark>
+                    </li>
+                    <li>
+                      {t("dacă la")} <mark>{t("tactul")} n</mark>{" "}
+                      <mark>{t("starea registrului")}</mark> {t("este")}{" "}
                       <mark>
-                        RD<sub>0</sub> = 0
+                        {t("diferită de 0 se poate face detecția erorii")}
                       </mark>
-                    </li>
-                    <li>
-                      pe primele n perioade de tact secvența r se adună cu
-                      valorile selectate din registru, rezultatul se înscrie în
-                      celula C<sub>k-1</sub>.
-                    </li>
-                    <li>
-                      la <mark>tactul n</mark> se verifică{" "}
-                      <mark>starea registrului </mark>: dacă este <mark>0</mark>
-                      atunci <mark>r este o secvență corectă</mark> și{" "}
-                      <mark>nu avem erori</mark> sau{" "}
-                      <mark>erorile sunt nedetectabile</mark>
-                    </li>
-                    <li>
-                      dacă la <mark>tactul n</mark>{" "}
-                      <mark>starea registrului</mark> este{" "}
-                      <mark>diferită de 0 se poate face detecția erorii</mark>,
-                      prin calcularea stărilor S<sub>n+1</sub>, S<sub>n+2</sub>,
-                      ..., S<sub>2n</sub>,{" "}
+                      ,{t("prin calcularea stărilor S")}
+                      <sub>n+1</sub>, S<sub>n+2</sub>, ..., S<sub>2n</sub>,{" "}
                       <mark>
-                        până când se obține starea fixă: S<sub>x</sub>
+                        {t("până când se obține starea fixă: S")}
+                        <sub>x</sub>
                       </mark>
                       .
                     </li>
                     <li>
                       <mark style={{ backgroundColor: "#b3e882" }}>
-                        Dacă există o eroare pe poziția i, starea fixă va fi la
-                        tactul n+(n-i-1)
+                        {t(
+                          "Dacă există o eroare pe poziția i, starea fixă va fi la tactul n+(n-i-1)"
+                        )}
                       </mark>
                     </li>
                   </ul>
@@ -455,13 +477,16 @@ const Lecture = () => {
             <Typography variant="h5" style={{ marginTop: "25px" }}>
               <b>
                 <PriorityHighIcon style={{ color: "red" }} />
-                Observație :
+                {t("Observație")} :
               </b>
               <span className="obs">
-                Sindromul S care se regăsește în starea RDR la momentul t=n : S
-                <sub>n</sub> ≠ 0 nu este egal cu restul (r(x))/(g(x)), ci o
-                modificare a formei acestuia, dar care permite însă detecția
-                erorii.
+                {t(
+                  "Sindromul S care se regăsește în starea RDR la momentul t=n"
+                )}{" "}
+                : S<sub>n</sub> ≠ 0{" "}
+                {t(
+                  "nu este egal cu restul (r(x))/(g(x)), ci o modificare a formei acestuia, dar care permite însă detecția erorii."
+                )}
               </span>
             </Typography>
           </div>
@@ -483,7 +508,7 @@ const Lecture = () => {
               }}
             >
               <b>
-                Decoder cu RDR și{" "}
+                {t("Decoder cu RDR și")}
                 <div
                   style={{
                     borderRadius: "50%",
@@ -508,7 +533,7 @@ const Lecture = () => {
                     +
                   </span>
                 </div>
-                exterioare pentru corecția erorilor
+                {t("exterioare pentru corecția erorilor")}
               </b>
             </Typography>
             {/* <div className="flashcards"></div> */}
@@ -519,53 +544,57 @@ const Lecture = () => {
             >
               <div className="Front">
                 <h2>
-                  Cum se corectează erorile identificate la pasul anterior?
+                  {t(
+                    "Cum se corectează erorile identificate la pasul anterior?"
+                  )}
                 </h2>
               </div>
               <div className="Back">
                 <h3>
                   <ul className="listCoDec">
                     <li>
-                      odată ce întregul cuvânt este recepționat (după cele n
-                      tacte), eroarea poate deveni detectabilă după cum am
-                      observat la pasul anterior
+                      {t(
+                        "odată ce întregul cuvânt este recepționat (după cele n tacte), eroarea poate deveni detectabilă după cum am observat la pasul anterior"
+                      )}
                     </li>
                     <li>
-                      dacă la <mark>tactul n</mark>
-                      <mark>starea registrului</mark> este
+                      {t("dacă")} t{"la"} <mark>{t("tactul")} n</mark>
+                      <mark>{t("starea registrului")}</mark> {t("este")}
                       <mark>
-                        diferită de 0(practic încercăm prin această metodă
-                        matematică să localizăm eroarea din secvența
-                        recepționată)
+                        {t(
+                          "diferită de 0(practic încercăm prin această metodă matematică să localizăm eroarea din secvența recepționată) "
+                        )}
                       </mark>
-                      , deci se trece la calcularea stărilor S<sub>n+1</sub>, S
-                      <sub>n+2</sub>, ..., S<sub>2n</sub>,
+                      , {t("deci se trece la calcularea stărilor")}S
+                      <sub>n+1</sub>, S<sub>n+2</sub>, ..., S<sub>2n</sub>,
                       <mark>
-                        până când se obține starea fixă: S<sub>x</sub>
+                        {t("până când se obține starea fixă:")} S<sub>x</sub>
                       </mark>
                     </li>
                     <li>
                       <mark style={{ backgroundColor: "#b3e882" }}>
-                        dacă există o eroare pe poziția i, starea fixă va fi la
-                        tactul n+(n-i-1)
+                        {t(
+                          "dacă există o eroare pe poziția i, starea fixă va fi la tactul n+(n-i-1)"
+                        )}
                       </mark>
                     </li>
                     <li>
-                      în cazul codurilor ciclice, corecția se realizează pe
-                      durata (n+1, 2n), adunând valoarea „1” pe poziția ce
-                      conține eroarea
+                      {t(
+                        "în cazul codurilor ciclice, corecția se realizează pe durata (n+1, 2n), adunând valoarea „1” pe poziția ce conține eroarea"
+                      )}
                     </li>
                     <li>
-                      deci pentru corecția erorilor cu coduri ciclice sunt
-                      necesare 2n tacte.
+                      {t(
+                        "deci pentru corecția erorilor cu coduri ciclice sunt necesare 2n tacte."
+                      )}
                     </li>
                     <li>
                       <mark
                         style={{ backgroundColor: "yellow", color: "#000" }}
                       >
-                        starea fixă a RS este [ 1 0 … 0 ]
+                        {t("starea fixă a RS este [ 1 0 … 0 ]")}
                       </mark>
-                      , adică toate celulele vor fi nule, mai puțin C
+                      , {t("adică toate celulele vor fi nule, mai puțin")} C
                       <sub>0</sub>.
                     </li>
                   </ul>
@@ -591,21 +620,23 @@ const Lecture = () => {
             <Typography variant="h5" style={{ marginTop: "25px" }}>
               <b>
                 <PriorityHighIcon style={{ color: "red" }} />
-                Observație 1:
+                {t("Observație")} 1:
               </b>
               <span className="obs">
-                Dacă starea fixă va fi pe tactul 2n, atunci am avut stare fixă
-                și pe tactul n.
+                {t(
+                  "Dacă starea fixă va fi pe tactul 2n, atunci am avut stare fixă și pe tactul n."
+                )}
               </span>
               <Typography variant="h5" style={{ marginTop: "25px" }}>
                 <b>
                   <PriorityHighIcon style={{ color: "red" }} />
-                  Observație 2:
+                  {t("Observație")} 2:
                 </b>
                 <span className="obs">
-                  De remarcat faptul că daca starea ( 1 0 0 ....0 ) s-ar obține
-                  pe durata (1, n ), aceasta ar genera corecții false, de unde
-                  necesitatea ca funcționarea P<sub>2</sub> să fie întreruptă.
+                  {t(
+                    "De remarcat faptul că daca starea ( 1 0 0 ....0 ) s-ar obține pe durata (1, n ), aceasta ar genera corecții false, de unde necesitatea ca funcționarea "
+                  )}
+                  P<sub>2</sub> {t("să fie întreruptă")}.
                 </span>
               </Typography>
             </Typography>

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useTransition } from "react";
 import { Link } from "react-router-dom";
 import Quiz from "./Quiz";
 import Layout from "../components/Layout";
-import CardHome from "../components/CardHome";
+// import CardHome from "../components/CardHome";
 import application from "../icons/application.png";
 import quiz from "../icons/quiz.png";
 import lecture from "../icons/lectureStudy.webp";
@@ -18,6 +18,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 export const handleAplicatie = () => {
   window.location.href = "/application";
 };
@@ -29,6 +30,7 @@ export const handleCurs = () => {
 };
 
 const Home = () => {
+  const { t } = useTranslation();
   return (
     <Layout>
       <div className="containerColumnForHomePage">
@@ -43,8 +45,9 @@ const Home = () => {
             className="HammingCode"
           >
             <b>
-              Codul Hamming ciclic corector de o eroare utilizat în codarea
-              canalului
+              {t(
+                "Codul Hamming ciclic corector de o eroare utilizat în codarea canalului"
+              )}
             </b>
           </Typography>
         </div>
@@ -53,58 +56,58 @@ const Home = () => {
             <Typography
               variant="h3"
               gutterBottom
-              style={{ margin: "45px 0px 20px 45px", textAlign: "center" }}
+              style={{
+                margin: "45px 0px 20px 45px",
+                textAlign: "center",
+              }}
               className="introductionQuestion"
             >
-              De ce este necesară utilizarea
+              {t("De ce este necesară utilizarea")}
             </Typography>
             <Typography
               variant="h3"
               gutterBottom
-              style={{ margin: "0px 0px 20px 45px", textAlign: "center" }}
+              style={{
+                margin: "0px 0px 20px 45px",
+                textAlign: "center",
+              }}
               className="introductionQuestion"
             >
-              unor astfel de coduri în proiectarea
+              {t("unor astfel de coduri în proiectarea")}
             </Typography>
             <Typography
               variant="h3"
               gutterBottom
-              style={{ margin: "0px 0px 20px 45px", textAlign: "center" }}
+              style={{
+                margin: "0px 0px 20px 45px",
+                textAlign: "center",
+              }}
               className="introductionQuestion"
             >
-              sistemelor de comunicații digitale ?
+              {t("sistemelor de comunicații digitale ?")}
             </Typography>
           </div>
 
           <Typography variant="h5" className="introductionParagraphsStyle">
-            Pentru a transmite sau a stoca informația într-un mod fiabil, fără
-            ca integritatea acesteia să fie coruptă în urma interacțiunii
-            inevitabile cu anumiți factori perturbatori precum: interferențe
-            electromagnetice, zgomot, pătări sau deteriorări în timpul printării
-            sau scanării cum ar fi în cazul codurilor QR, congestia rețelei de
-            comunicații, pentru a compensa erorile fizice care pot să apară în
-            timpul citirii datelor de pe medii optice(CD-uri, DVD-uri și
-            Blu-ray-uri). Și lista încă poate continua.
+            {t(
+              "Pentru a transmite sau a stoca informația într-un mod fiabil, fără ca integritatea acesteia să fie coruptă în urma interacțiunii inevitabile cu anumiți factori perturbatori precum: interferențe electromagnetice, zgomot, pătări sau deteriorări în timpul printării sau scanării cum ar fi în cazul codurilor QR, congestia rețelei de comunicații, pentru a compensa erorile fizice care pot să apară în timpul citirii datelor de pe medii optice(CD-uri, DVD-uri și Blu-ray-uri). Și lista încă poate continua."
+            )}
           </Typography>
           <Typography variant="h5" className="introductionParagraphsStyle">
-            Cu alte cuvinte, informația pe care o transmitem ne dorim să fie
-            aceeași la recepție, să nu conțină erori, iar în caz contrar,
-            acestea să fie detectate și corectate pentru a ne putea bucura de
-            informația corectă. Acest lucru este posibil prin{" "}
-            <b style={{ color: "#3ca60d" }}>codarea canalului</b> care implică
-            adăugarea de redundanță mesajului (informației) pentru a-l face mai
-            rezistent la zgomot sau alți factori perturbatori, care sunt
-            prezenți, din păcate, atât în sistemele de comunicații wireless, cât
-            și în cele de stocare magnetică. Spre deosebire de codarea surselor
-            (compresie), utilizată pentru a elimina redundanța din surse (de
-            exemplu, fișierele zip și imaginile JPEG), implicit de a reduce și
-            lățimea de bandă, codarea canalului consumă lățimea de bandă prin
-            introducerea biților redundanți.
+            {t(
+              "Cu alte cuvinte, informația pe care o transmitem ne dorim să fie aceeași la recepție, să nu conțină erori, iar în caz contrar, acestea să fie detectate și corectate pentru a ne putea bucura de informația corectă. Acest lucru este posibil prin"
+            )}
+            <b style={{ color: "#3ca60d" }}> {t("codarea canalului")}</b>{" "}
+            {t(
+              "care implică adăugarea de redundanță mesajului (informației) pentru a-l face mai rezistent la zgomot sau alți factori perturbatori, care sunt prezenți, din păcate, atât în sistemele de comunicații wireless, cât și în cele de stocare magnetică. Spre deosebire de codarea surselor (compresie), utilizată pentru a elimina redundanța din surse (de exemplu, fișierele zip și imaginile JPEG), implicit de a reduce și lățimea de bandă, codarea canalului consumă lățimea de bandă prin introducerea biților redundanți."
+            )}
           </Typography>
           <Typography variant="h5" className="introductionParagraphsStyle">
-            Conceptele tehnice și teoremele cheie care au revoluționat
-            înțelegerea erorilor în transmiterea de date au fost fondate de
-            <b> Claude Shannon</b>, <b>"părintele teoriei informației"</b>.
+            {t(
+              "Conceptele tehnice și teoremele cheie care au revoluționat înțelegerea erorilor în transmiterea de date au fost fondate de"
+            )}
+            <b> Claude Shannon</b>,{" "}
+            <b>"{t("părintele teoriei informației")}"</b>.
           </Typography>
           <img
             src={ClaudeShannon}
@@ -116,61 +119,57 @@ const Home = () => {
             }}
           />
           <Typography variant="h5" className="introductionParagraphsStyle">
-            În cadrul lucrării sale intitulate{" "}
-            <em>"A Mathematical Theory of Communication"</em>, C.E. Shannon a
-            introdus conceptul cunoscut astăzi sub numele de a doua teoremă a
-            lui Shannon, care oferă o soluție pentru gestionarea perturbațiilor
-            în transmiterea și stocarea informațiilor. Enunțul teoremei
-            statuează faptul ca{" "}
-            <b style={{ color: "#3ca60d" }}> pe un canal cu interferențe</b>{" "}
-            având o anumită capacitate (notată C),{" "}
+            {t("În cadrul lucrării sale intitulate")}
+            <em>"A Mathematical Theory of Communication"</em>, C.E. Shannon{" "}
+            {t(
+              "a introdus conceptul cunoscut astăzi sub numele de a doua teoremă a lui Shannon, care oferă o soluție pentru gestionarea perturbațiilor în transmiterea și stocarea informațiilor. Enunțul teoremei statuează faptul că"
+            )}
             <b style={{ color: "#3ca60d" }}>
-              este posibilă realizare unei transmisii în timp real a unei surse
-              de informație cu un debit (Ḋ) mai mic decât capacitatea canalului,
-              cu o probabilitate extrem de mică a erorilor (P(E)), prin
-              utilizarea unui cod cu o anumită lungime (n).
+              {t("pe un canal cu interferențe")}
+            </b>
+            {t("având o anumită capacitate (notată C),")}
+            <b style={{ color: "#3ca60d" }}>
+              {t(
+                "este posibilă realizare unei transmisii în timp real a unei surse de informație cu un debit (Ḋ) mai mic decât capacitatea canalului,cu o probabilitate extrem de mică a erorilor (P(E)), prin utilizarea unui cod cu o anumită lungime (n)."
+              )}
             </b>
           </Typography>
           <Typography variant="h5" className="introductionParagraphsStyle">
-            A doua teoremă formulată de Claude Shannon evidențiază o observație
-            notabilă:{" "}
+            {t(
+              "A doua teoremă formulată de Claude Shannon evidențiază o observație notabilă:"
+            )}
             <b style={{ color: "#3ca60d" }}>
-              indiferent de nivelul de perturbare prezent într-un canal de
-              comunicații, teoretic, există posibilitatea de a efectua o
-              transmisie cu o probabilitate extrem de mică a erorilor prin
-              utilizarea codurilor redundante pentru a asigura protecția
-              împotriva perturbațiilor
+              {t(
+                "indiferent de nivelul de perturbare prezent într-un canal de comunicații, teoretic, există posibilitatea de a efectua o transmisie cu o probabilitate extrem de mică a erorilor prin utilizarea codurilor redundante pentru a asigura protecția împotriva perturbațiilor"
+              )}
             </b>
-            . În practică se utilizează strategia de adăugare intenționată de
-            redundanță înainte de transmiterea informației.
+            .{" "}
+            {t(
+              "În practică se utilizează strategia de adăugare intenționată de redundanță înainte de transmiterea informației."
+            )}
           </Typography>
           <Typography variant="h5" className="introductionParagraphsStyle">
-            Această metodă implică utilizarea cuvintelor de cod cu lungimi "n",
-            printre care se numără si
+            {t(
+              " Această metodă implică utilizarea cuvintelor de cod cu lungimi n, printre care se numără și "
+            )}
             <b>
-              {" "}
-              Codul Hamming ciclic corector de o eroare, notat cu C(n,m)
-            </b>{" "}
-            pe care îl vom aborda. Acest cod este utilizat în realitate, spre
-            exemplu, în comunicații prin satelit deoarece semnalele pot fi
-            susceptibile la erori datorate interferențelor și zgomotului în
-            mediul de transmisie sau în memorii ECC (Error correction code) care
-            stau la baza sistemelor de stocare RAID 2(Redundant Array of
-            Independent Disks) capabile să recupereze datele în cazul unei
-            defectări a unui disc și poate corecta corupția datelor doar atunci
-            când datele și paritatea corespunzătoare sunt intacte.
+              {t("Codul Hamming ciclic corector de o eroare, notat cu C(n,m)")}
+            </b>
+            {t(
+              " pe care îl vom aborda. Acest cod este utilizat în realitate, spre exemplu, în comunicații prin satelit deoarece semnalele pot fi susceptibile la erori datorate interferențelor și zgomotului în mediul de transmisie sau în memorii ECC (Error correction code) care stau la baza sistemelor de stocare RAID 2(Redundant Array of Independent Disks) capabile să recupereze datele în cazul unei defectări a unui disc și poate corecta corupția datelor doar atunci când datele și paritatea corespunzătoare sunt intacte."
+            )}
           </Typography>
-          <Typography variant="h5" className="introductionParagraphsStyle">
+          {/* <Typography variant="h5" className="introductionParagraphsStyle">
             Un exemplu mai accesibil tututor persoanelor care nu dispun de
             limbajul tehnic și care descrie mai bine efectul pe care îl are
             adăugarea de redundanță sursei codate înainte de a fi transmisă pe
             canalul de comunicație este ilustrat în figura de mai jos.
-          </Typography>
-          <img
+          </Typography> */}
+          {/* <img
             src={channelCoding}
             style={{ width: "1200px", height: "400px", alignSelf: "center" }}
-          />
-          <Typography variant="h5" className="introductionParagraphsStyle">
+          /> */}
+          {/* <Typography variant="h5" className="introductionParagraphsStyle">
             <b>Scenariu </b> : Alexa dorește să trimită 5 imagini colegei sale
             de bancă, Alina. Înainte de a transmite cele 5 imagini, pachetului
             de date trimis i se adaugă un fișier care conține indexul
@@ -191,7 +190,7 @@ const Home = () => {
             Hamming ciclic corector de o eroare, iar pentru o înțelegere mai
             bună a acestuia utilizatorul este invitat să parcurgă secțiunile de
             mai jos.
-          </Typography>
+          </Typography> */}
         </div>
         <div className="cardsHomeContainer">
           <Card
@@ -207,7 +206,7 @@ const Home = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  <b>Curs</b>
+                  <b>{t("Curs")}</b>
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -219,7 +218,11 @@ const Home = () => {
                   style={{ fontWeight: "600" }}
                 >
                   <em>
-                    "Rădăcinile educației sunt amare, dar fructul este dulce."
+                    "{" "}
+                    {t(
+                      "Rădăcinile educației sunt amare, dar fructul este dulce."
+                    )}
+                    "
                   </em>
                 </Typography>
                 <div
@@ -241,7 +244,7 @@ const Home = () => {
                 }}
                 onClick={handleCurs}
               >
-                Începe
+                {t("Începe")}
               </Button>
             </CardActions>
           </Card>
@@ -258,7 +261,7 @@ const Home = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  <b>Aplicație</b>
+                  <b>{t("Aplicație")}</b>
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -269,7 +272,7 @@ const Home = () => {
                   color="text.secondary"
                   style={{ fontWeight: "600" }}
                 >
-                  <em>"Exemplul este cel mai bun percept."</em>
+                  <em>"{t("Exemplul este cel mai bun percept.")}"</em>
                 </Typography>
                 <div
                   style={{
@@ -290,7 +293,7 @@ const Home = () => {
                 }}
                 onClick={handleAplicatie}
               >
-                Începe
+                {t("Începe")}
               </Button>
             </CardActions>
           </Card>
@@ -307,7 +310,7 @@ const Home = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  <b>Quiz</b>
+                  <b>{t("Quiz")}</b>
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -319,8 +322,11 @@ const Home = () => {
                   style={{ fontWeight: "600" }}
                 >
                   <em>
-                    "Fă o pasiune din a învăța. Astfel, niciodată nu te vei opri
-                    din a crește."
+                    "
+                    {t(
+                      "Fă o pasiune din a învăța. Astfel, niciodată nu te vei opri din a crește."
+                    )}
+                    "
                   </em>
                 </Typography>
                 <div
@@ -345,7 +351,7 @@ const Home = () => {
                 }}
                 onClick={handleQuiz}
               >
-                Testează-ți cunoștințele
+                {t("Testează-ți cunoștințele")}
               </Button>
             </CardActions>
           </Card>
