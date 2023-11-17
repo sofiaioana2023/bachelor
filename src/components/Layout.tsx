@@ -72,7 +72,7 @@ const Layout = ({ children }: LayoutProps) => {
             <img
               src={iconTTI}
               alt="TTI"
-              style={{ width: "48px", height: "48px" }}
+              style={{ width: "56px", height: "56px" }}
             />
             <p
               style={{

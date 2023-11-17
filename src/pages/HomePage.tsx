@@ -35,21 +35,35 @@ const Home = () => {
     <Layout>
       <div className="containerColumnForHomePage">
         <div className="backgroundHome">
-          <Typography
-            variant="h2"
-            gutterBottom
-            style={{
-              marginTop: "80px",
-              color: "aliceblue",
-            }}
-            className="HammingCode"
-          >
-            <b>
-              {t(
-                "Codul Hamming ciclic corector de o eroare utilizat în codarea canalului"
-              )}
-            </b>
-          </Typography>
+          <div className="middle">
+            <div className="text">
+              <div>
+                {t(
+                  "Richard Wesley Hamming was an American mathematician and computer scientist."
+                )}
+              </div>
+              <div>
+                {t(
+                  "One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data."
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="text-block">
+            <h4>
+              <i>
+                “If you don't work on important problems, it's not likely that
+                you'll do important work.”
+              </i>
+            </h4>
+
+            <p>Richard Hamming</p>
+          </div>
+          <div className="HammingCode">
+            {t(
+              "Codul Hamming ciclic corector de o eroare utilizat în codarea canalului"
+            )}
+          </div>
         </div>
         <div className="introduction">
           <div className="introductionAnimation">
@@ -102,63 +116,72 @@ const Home = () => {
               "care implică adăugarea de redundanță mesajului (informației) pentru a-l face mai rezistent la zgomot sau alți factori perturbatori, care sunt prezenți, din păcate, atât în sistemele de comunicații wireless, cât și în cele de stocare magnetică. Spre deosebire de codarea surselor (compresie), utilizată pentru a elimina redundanța din surse (de exemplu, fișierele zip și imaginile JPEG), implicit de a reduce și lățimea de bandă, codarea canalului consumă lățimea de bandă prin introducerea biților redundanți."
             )}
           </Typography>
-          <Typography variant="h5" className="introductionParagraphsStyle">
-            {t(
-              "Conceptele tehnice și teoremele cheie care au revoluționat înțelegerea erorilor în transmiterea de date au fost fondate de"
-            )}
-            <b> Claude Shannon</b>,{" "}
-            <b>"{t("părintele teoriei informației")}"</b>.
-          </Typography>
-          <img
-            src={ClaudeShannon}
-            style={{
-              width: "500px",
-              height: "500px",
-              alignSelf: "center",
-              padding: "15pxs",
-            }}
-          />
-          <Typography variant="h5" className="introductionParagraphsStyle">
-            {t("În cadrul lucrării sale intitulate")}
-            <em>"A Mathematical Theory of Communication"</em>, C.E. Shannon{" "}
-            {t(
-              "a introdus conceptul cunoscut astăzi sub numele de a doua teoremă a lui Shannon, care oferă o soluție pentru gestionarea perturbațiilor în transmiterea și stocarea informațiilor. Enunțul teoremei statuează faptul că"
-            )}
-            <b style={{ color: "#3ca60d" }}>
-              {t("pe un canal cu interferențe")}
-            </b>
-            {t("având o anumită capacitate (notată C),")}
-            <b style={{ color: "#3ca60d" }}>
-              {t(
-                "este posibilă realizare unei transmisii în timp real a unei surse de informație cu un debit (Ḋ) mai mic decât capacitatea canalului,cu o probabilitate extrem de mică a erorilor (P(E)), prin utilizarea unui cod cu o anumită lungime (n)."
-              )}
-            </b>
-          </Typography>
-          <Typography variant="h5" className="introductionParagraphsStyle">
-            {t(
-              "A doua teoremă formulată de Claude Shannon evidențiază o observație notabilă:"
-            )}
-            <b style={{ color: "#3ca60d" }}>
-              {t(
-                "indiferent de nivelul de perturbare prezent într-un canal de comunicații, teoretic, există posibilitatea de a efectua o transmisie cu o probabilitate extrem de mică a erorilor prin utilizarea codurilor redundante pentru a asigura protecția împotriva perturbațiilor"
-              )}
-            </b>
-            .{" "}
-            {t(
-              "În practică se utilizează strategia de adăugare intenționată de redundanță înainte de transmiterea informației."
-            )}
-          </Typography>
-          <Typography variant="h5" className="introductionParagraphsStyle">
-            {t(
-              " Această metodă implică utilizarea cuvintelor de cod cu lungimi n, printre care se numără și "
-            )}
-            <b>
-              {t("Codul Hamming ciclic corector de o eroare, notat cu C(n,m)")}
-            </b>
-            {t(
-              " pe care îl vom aborda. Acest cod este utilizat în realitate, spre exemplu, în comunicații prin satelit deoarece semnalele pot fi susceptibile la erori datorate interferențelor și zgomotului în mediul de transmisie sau în memorii ECC (Error correction code) care stau la baza sistemelor de stocare RAID 2(Redundant Array of Independent Disks) capabile să recupereze datele în cazul unei defectări a unui disc și poate corecta corupția datelor doar atunci când datele și paritatea corespunzătoare sunt intacte."
-            )}
-          </Typography>
+
+          <div className="ShannonAndText">
+            <img
+              src={ClaudeShannon}
+              style={{
+                width: "500px",
+                height: "500px",
+                alignSelf: "center",
+                padding: "15pxs",
+                marginLeft: "20px",
+              }}
+              className="ShannoPhoto"
+            />
+            <div className="justTextShannon">
+              <Typography variant="h5" className="introductionParagraphsStyle">
+                {t(
+                  "Conceptele tehnice și teoremele cheie care au revoluționat înțelegerea erorilor în transmiterea de date au fost fondate de"
+                )}
+                <b> Claude Shannon</b>,{" "}
+                <b>"{t("părintele teoriei informației")}"</b>.
+              </Typography>
+              <Typography variant="h5" className="introductionParagraphsStyle">
+                {t("În cadrul lucrării sale intitulate")}
+                <em>"A Mathematical Theory of Communication"</em>, C.E. Shannon{" "}
+                {t(
+                  "a introdus conceptul cunoscut astăzi sub numele de a doua teoremă a lui Shannon, care oferă o soluție pentru gestionarea perturbațiilor în transmiterea și stocarea informațiilor. Enunțul teoremei statuează faptul că"
+                )}
+                <b style={{ color: "#3ca60d" }}>
+                  {t("pe un canal cu interferențe")}
+                </b>
+                {t("având o anumită capacitate (notată C),")}
+                <b style={{ color: "#3ca60d" }}>
+                  {t(
+                    "este posibilă realizare unei transmisii în timp real a unei surse de informație cu un debit (Ḋ) mai mic decât capacitatea canalului,cu o probabilitate extrem de mică a erorilor (P(E)), prin utilizarea unui cod cu o anumită lungime (n)."
+                  )}
+                </b>
+              </Typography>
+              <Typography variant="h5" className="introductionParagraphsStyle">
+                {t(
+                  "A doua teoremă formulată de Claude Shannon evidențiază o observație notabilă:"
+                )}
+                <b style={{ color: "#3ca60d" }}>
+                  {t(
+                    "indiferent de nivelul de perturbare prezent într-un canal de comunicații, teoretic, există posibilitatea de a efectua o transmisie cu o probabilitate extrem de mică a erorilor prin utilizarea codurilor redundante pentru a asigura protecția împotriva perturbațiilor"
+                  )}
+                </b>
+                .{" "}
+                {t(
+                  "În practică se utilizează strategia de adăugare intenționată de redundanță înainte de transmiterea informației."
+                )}
+              </Typography>
+              <Typography variant="h5" className="introductionParagraphsStyle">
+                {t(
+                  " Această metodă implică utilizarea cuvintelor de cod cu lungimi n, printre care se numără și "
+                )}
+                <b>
+                  {t(
+                    "Codul Hamming ciclic corector de o eroare, notat cu C(n,m)"
+                  )}
+                </b>
+                {t(
+                  " pe care îl vom aborda. Acest cod este utilizat în realitate, spre exemplu, în comunicații prin satelit deoarece semnalele pot fi susceptibile la erori datorate interferențelor și zgomotului în mediul de transmisie sau în memorii ECC (Error correction code) care stau la baza sistemelor de stocare RAID 2(Redundant Array of Independent Disks) capabile să recupereze datele în cazul unei defectări a unui disc și poate corecta corupția datelor doar atunci când datele și paritatea corespunzătoare sunt intacte."
+                )}
+              </Typography>
+            </div>
+          </div>
           {/* <Typography variant="h5" className="introductionParagraphsStyle">
             Un exemplu mai accesibil tututor persoanelor care nu dispun de
             limbajul tehnic și care descrie mai bine efectul pe care îl are
