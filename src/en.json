@@ -1,5 +1,6 @@
 {
     "Information Transmission Theory": "Information Transmission Theory",
+    "Teoria Transmiterii Informației":"Information Transmission Theory",
     "Home" : "Home",
     "Lecture":"Lecture",
     "Notes" : "Notes",
@@ -200,7 +201,12 @@
     "Felicitări!Ai răspuns corect la toate întrebările!":"Congratulations! You answered correctly to all the questions!",
     "Enter name:":"Enter your name:",
     "Richard Wesley Hamming was an American mathematician and computer scientist.":"Richard Wesley Hamming was an American mathematician and computer scientist.",
-    "One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data.":"One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data."
+    "One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data.":"One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data.",
+    "Introducere":"Introduction",
+    "Decoder pentru corectia erorilor":"Decoder for error correction",
+    "Decoder pentru detectia erorilor":"Decoder for error detection",
+    "Simuleaza codare si decodarea":"Simulate encoding and decoding"
+    
 
 
 

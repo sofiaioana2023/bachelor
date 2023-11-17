@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 
 const TakeNotes = () => {
   const [areColorsHidden, setAreColorsHidden] = useState(true);
-  const [selectedColor, setSelectedColor] = useState(""); // Track the selected color
+  const [selectedColor, setSelectedColor] = useState("");
   const { t } = useTranslation();
 
   const toggleColors = () => {
@@ -22,7 +22,6 @@ const TakeNotes = () => {
   };
 
   const handleColorClick = (color: any) => {
-    // Show NoteComponent when a color is clicked
     setSelectedColor(color);
   };
 

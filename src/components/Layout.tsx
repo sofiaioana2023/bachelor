@@ -11,6 +11,7 @@ import iconRO from "../icons/icons8-romania-48.png";
 import iconFR from "../icons/icons8-france-48.png";
 import iconEN from "../icons/icons8-english-48.png";
 import iconTTI from "../icons/icons8-technology-64.png";
+import CopyrightIcon from "@mui/icons-material/Copyright";
 import {
   FormControl,
   InputBase,
@@ -248,6 +249,25 @@ const Layout = ({ children }: LayoutProps) => {
         </nav>
       </header>
       <main className="contentPage">{children}</main>
+      <div
+        style={{
+          height: "80px",
+          background: "linear-gradient(#323233,#000)",
+          marginTop: "25px",
+          color: "white",
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "center",
+        }}
+      >
+        <span style={{ margin: "0px 10px 0px 50px" }}>
+          <b>Copyright</b>
+        </span>
+        <CopyrightIcon />
+        <span>
+          <b>ILSOFIA 2023</b>
+        </span>
+      </div>
     </div>
   );
 };

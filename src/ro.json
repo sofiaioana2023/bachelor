@@ -219,7 +219,12 @@
     "Felicitări!Ai răspuns corect la toate întrebările!":"Felicitări!Ai răspuns corect la toate întrebările!",
     "Enter name:":"Introdu numele tău :",
     "Richard Wesley Hamming was an American mathematician and computer scientist.":"Richard Wesley Hamming a fost un matematician și informatician american.",
-    "One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data.":"Una dintre cele mai cunoscute contribuții ale sale este dezvoltarea codurilor Hamming, o clasă de coduri folosite în comunicațiile digitale pentru detectecția și corecția erorilor în datele transmise."
+    "One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data.":"Una dintre cele mai cunoscute contribuții ale sale este dezvoltarea codurilor Hamming, o clasă de coduri folosite în comunicațiile digitale pentru detecția și corecția erorilor în datele transmise.",
+    "Introducere":"Introducere",
+    "Decoder pentru corectia erorilor":"Decoder pentru corecția erorilor",
+    "Decoder pentru detectia erorilor":"Decoder pentru detecția erorilor",
+    "Teoria Transmiterii Informației":"Teoria Transmiterii Informației",
+    "Simuleaza codare si decodarea":"Simulează codarea și decodarea"
     
    
 
