@@ -42,6 +42,7 @@ const CoderAnimation = () => {
     slide7,
     slide8,
   ];
+  const [decodingVariables, setdecodingVariable] = useState({});
   // VARIABILE PT DECODARE
   let cuvantdecodreceptionatsicorectat: number[] = []; //ecran
   let pozeinr = 0;
@@ -66,7 +67,7 @@ const CoderAnimation = () => {
   let valoareBitRedundant = 0;
   let celuleRegistru = [C2, C1, C0];
   const informatie = informationByUser.split("").map(Number);
-  let auxErrorWord = [];
+  let auxErrorWord: number[] = [];
   let sumator1 = ""; // ecran
   let sumator2 = ""; // ecran
   let cuvantDeCod = ""; // ecran
@@ -191,7 +192,6 @@ const CoderAnimation = () => {
   };
 
   const secondFor = (k: number) => {
-    // console.log(stareRDRLam);
     tact = `Coderul este la tactul ${Number(tactm) + k}`;
     tactCanvas = Number(tactm) + k;
     setTactDOM(tactCanvas);
@@ -216,7 +216,9 @@ const CoderAnimation = () => {
       tact,
       tactCanvas,
       currentStep: k + 4,
+      r: errorWord,
     });
+
     return {
       sumator1,
       sumator2,
@@ -231,8 +233,8 @@ const CoderAnimation = () => {
     errorWord[errorWord.length - 1 - Number(positionErrorByUser)] =
       errorWord[errorWord.length - 1 - Number(positionErrorByUser)] ^ 1;
     auxErrorWord = errorWord;
-    // console.log(` cuvant eronat are valoarea ${auxErrorWord}`);
   }
+
   const gen = React.useMemo(() => generator(1), [userInput, informationByUser]);
 
   const sketchProps = wrapProps;
@@ -275,8 +277,6 @@ const CoderAnimation = () => {
     });
   };
 
-  // console.log(`eroarea este pe pozitie ${positionErrorByUser}`);
-
   useEffect(() => {
     if (tactDOM === 7) {
       setTimeout(() => {
@@ -289,8 +289,6 @@ const CoderAnimation = () => {
 
   //ALGORITM DECODARE
 
-  let r = errorWord;
-  // console.log(`cuvantul eronat arata asa : ${errorWord}`);
   function* generatorDecoder(i: number) {
     yield firstForDecoder(i);
     yield firstForDecoder(i + 1);
@@ -309,21 +307,38 @@ const CoderAnimation = () => {
       yield secondForDecoder(wrapProps.contorStareFixa || 0 + 6);
     }
   }
+  let r = errorWord;
 
   const firstForDecoder = (i: number) => {
-    console.log(i, "000000");
     tactDecoderDom = i;
     C0d = C1d;
     C1d = C2d;
     S4 = celuleDecodor[2] ^ celuleDecodor[1];
     S5 = S4 ^ r[i - 1];
+    console.log(r);
+
+    // console.log(
+    //   "cuvanteornaat",
+    //   errorWord,
+    //   errorWord[tactDecoderDom - 1],
+    //   tactDecoderDom,
+    //   "tact",
+    //   C0d,
+    //   "c0",
+    //   C1d,
+    //   "c1d",
+    //   S4,
+    //   "s4",
+    //   S5,
+    //   "s5",
+    //   "celuledecodor",
+    //   celuleDecodor
+    // );
     C2d = S5;
     celuleDecodor.unshift(S5);
     celuleDecodor.pop();
-    console.log(celuleDecodor, "=====");
-    // console.log(`celule decodor pana la tactiul 7 sunt ${celuleDecodor}`);
+
     if (i === 7) {
-      console.log("meet,", celuleDecodor);
       celuleDecodor7 = celuleDecodor;
     }
 
@@ -364,11 +379,7 @@ const CoderAnimation = () => {
     C2d = S5;
     celuleDecodor7.unshift(S5);
     celuleDecodor7.pop();
-    // if (k) {
-    //   console.log(
-    //     `la tactul ${contorStareFixa} registrul contine val ${celuleDecodor7}`
-    //   );
-    // }
+
     if (
       celuleDecodor7[0] === 0 &&
       celuleDecodor7[1] === 0 &&
@@ -414,16 +425,6 @@ const CoderAnimation = () => {
   const genDecoder = React.useMemo(() => generatorDecoder(1), []);
 
   const decoding = () => {
-    console.log(
-      "decoding...tact ceva:",
-      wrapProps.contorStareFixa,
-      " si stareFixaGasita:",
-      wrapProps.contorStareFixaGasita,
-      "celule:",
-      wrapProps.celuleDecodor7,
-      "---",
-      k
-    );
     genDecoder.next();
     setisDecoding(true);
     setIsDecodingStarted(true);
@@ -553,7 +554,6 @@ const CoderAnimation = () => {
             ) : (
               <input
                 type="text"
-                // disabled={isInputDisabled}
                 placeholder="0123456"
                 value={positionErrorByUser}
                 onChange={handlePositionErrorInput}
@@ -612,7 +612,7 @@ const CoderAnimation = () => {
           {t("NEXT")}
         </Button>
       </div>
-      <p>{wrapProps.celuleDecodor}</p>
+      {/* <p>{wrapProps.celuleDecodor}</p> */}
     </div>
   );
 };

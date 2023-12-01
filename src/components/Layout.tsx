@@ -12,6 +12,7 @@ import iconFR from "../icons/icons8-france-48.png";
 import iconEN from "../icons/icons8-english-48.png";
 import iconTTI from "../icons/icons8-technology-64.png";
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import computerscience from "../icons/computer-science.png";
 import {
   FormControl,
   InputBase,
@@ -260,12 +261,20 @@ const Layout = ({ children }: LayoutProps) => {
           alignItems: "center",
         }}
       >
-        <span style={{ margin: "0px 10px 0px 50px" }}>
-          <b>Copyright</b>
-        </span>
-        <CopyrightIcon />
-        <span>
-          <b>ILSOFIA 2023</b>
+        <div style={{ backgroundColor: "white", margin: "0px 25px" }}>
+          <img
+            src={computerscience}
+            style={{ height: "50px", width: "66px", color: "white" }}
+          />
+        </div>
+        <span
+          style={{ fontSize: "20px", letterSpacing: "3px", color: "aliceblue" }}
+        >
+          <b>
+            {t(
+              "CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE"
+            )}
+          </b>
         </span>
       </div>
     </div>

@@ -205,7 +205,9 @@
     "Introducere":"Introduction",
     "Decoder pentru corectia erorilor":"Decoder for error correction",
     "Decoder pentru detectia erorilor":"Decoder for error detection",
-    "Simuleaza codare si decodarea":"Simulate encoding and decoding"
+    "Simuleaza codare si decodarea":"Simulate encoding and decoding",
+    "CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE":"Cyclic Coding and Decoding using Linear Feedback Shift Registers"
+
     
 
 

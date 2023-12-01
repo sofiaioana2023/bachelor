@@ -284,7 +284,7 @@ const Home = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  <b>{t("Aplicație")}</b>
+                  <b>{t("Laborator")}</b>
                 </Typography>
               </CardContent>
             </CardActionArea>

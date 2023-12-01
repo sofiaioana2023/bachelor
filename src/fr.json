@@ -222,7 +222,9 @@
     "Introducere":"Introduction",
     "Decoder pentru corectia erorilor":"Décodeur pour la correction d'erreurs",
     "Decoder pentru detectia erorilor":"Décodeur pour la détection d'erreurs",
-    "Simuleaza codare si decodarea":"Simuler l'encodage et le décodage"
+    "Simuleaza codare si decodarea":"Simuler l'encodage et le décodage",
+    "CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE":"Codage et décodage cyclique par registres à rétroaction"
+
     
 
 

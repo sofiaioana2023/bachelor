@@ -16,8 +16,9 @@ import finish from "../icons/finish.png";
 import step1to4 from "../icons/steps1to4.png";
 import decoderptcorectie from "../icons/decoderptcorectie.png";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import codor from "../icons/codor.png";
-import decodor from "../icons/decodor.png";
+import codor from "../icons/codeec.png";
+
+import decodor from "../icons/decod.png";
 import CeSuntRDR from "../components/LectureComp/CeSuntRDR";
 import CodareAlgebrica from "../components/LectureComp/CodareAlgebrica";
 import ScrollMessage from "../components/ScrollMessage";
