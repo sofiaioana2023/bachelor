@@ -1,25 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import About from "./pages/About";
-import TakeNotes from "./pages/TakeNotes";
-import Quiz from "./pages/Quiz";
-import Application from "./pages/Application";
-import Lecture from "./pages/Lecture";
-import HomePage from "./pages/HomePage";
-import { ClipLoader, PuffLoader } from "react-spinners";
-import { Typography } from "@mui/material";
-import { labContext } from "./helpers/Contexts";
+import React, { useEffect, useState } from "react"
+import { Route, Routes } from "react-router-dom"
+import { PuffLoader } from "react-spinners"
+
+import About from "./pages/About"
+import Application from "./pages/Application"
+import HomePage from "./pages/HomePage"
+import Lecture from "./pages/Lecture"
+import Quiz from "./pages/Quiz"
+import TakeNotes from "./pages/TakeNotes"
+
+import "./App.css"
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const { userName } = useContext(labContext);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false);
-    }, 100);
-  }, []);
+      setIsLoading(false)
+    }, 100)
+  }, [])
 
   return (
     <div className="App">
@@ -42,7 +41,7 @@ function App() {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
