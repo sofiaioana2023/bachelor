@@ -1,8 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { labContext } from "../helpers/Contexts";
-import { ReactP5Wrapper } from "@p5-wrapper/react";
-import { MySketch } from "../componentsLab/MySketck";
 import { Box, Button, TextField } from "@mui/material";
+import { ReactP5Wrapper } from "@p5-wrapper/react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { MySketch } from "../componentsLab/MySketck";
+import { labContext } from "../helpers/Contexts";
+import decoderschema from "../icons/decoderschema.png";
 import slide1 from "../icons/tact00.png";
 import slide2 from "../icons/tact1.png";
 import slide3 from "../icons/tact2.png";
@@ -11,9 +14,20 @@ import slide5 from "../icons/tact4.png";
 import slide6 from "../icons/tact5.png";
 import slide7 from "../icons/tact6.png";
 import slide8 from "../icons/tact7.png";
-import decoderschema from "../icons/decoderschema.png";
-import { useTranslation } from "react-i18next";
 
+export interface IDecoderProps{
+  tactDecoderDom:number,
+  C0d:number,
+  C1d:number,
+  C2d:number,
+  S4 :number,
+  S5:number,
+  decoderCells:number[],
+  decoderCells7:number[],
+  pozeinr:number,
+  contorStareFixaGasita:number,
+  cuvantdecodreceptionatsicorectat:number[]
+}
 const CoderAnimation = () => {
   const { t } = useTranslation();
   const { labState, setLabState } = React.useContext(labContext);
@@ -42,21 +56,34 @@ const CoderAnimation = () => {
     slide7,
     slide8,
   ];
-  const [decodingVariables, setdecodingVariable] = useState({});
-  // VARIABILE PT DECODARE
-  let cuvantdecodreceptionatsicorectat: number[] = []; //ecran
-  let pozeinr = 0;
-  let C0d = 0; //ecran
-  let C1d = 0; //ecran
-  let C2d = 0; //ecran
-  let celuleDecodor = [C0d, C1d, C2d];
-  let contorStareFixaGasita = 0;
 
-  let celuleDecodor7: number[] = [];
+  const [decodingVariables, setdecodingVariable] = useState({});
+  const [decodingStep,setDecodingStep] = useState(1)
+  const [decoderProps,setDecoderProps] = useState<IDecoderProps>({
+    tactDecoderDom:0,
+    C0d:0,
+    C1d:0,
+    C2d:0,
+    S4 :0,
+    S5:0,
+    decoderCells:[0,0,0],
+    decoderCells7:[],
+    pozeinr:0,
+    contorStareFixaGasita:0,
+    cuvantdecodreceptionatsicorectat:[]
+  })
+  // VARIABILE PT DECODARE
+  // let cuvantdecodreceptionatsicorectat: number[] = []; //ecran
+  
+  // let C0d = 0; //ecran
+  // let C1d = 0; //ecran
+  // let C2d = 0; //ecran
+  // let celuleDecodor = [C0d, C1d, C2d];
+
+  // let celuleDecodor7: number[] = [];
   let contorStareFixa = 8;
-  let S4 = 0; //ecran
-  let S5 = 0; //ecran
-  let tactDecoderDom = 0; //ecran
+  // let S4 = 0; //ecran
+  // let S5 = 0; //ecran
   let tactDecoderDomEroare = 0;
 
   //VARIABILE PT CODARE
@@ -67,7 +94,6 @@ const CoderAnimation = () => {
   let valoareBitRedundant = 0;
   let celuleRegistru = [C2, C1, C0];
   const informatie = informationByUser.split("").map(Number);
-  let auxErrorWord: number[] = [];
   let sumator1 = ""; // ecran
   let sumator2 = ""; // ecran
   let cuvantDeCod = ""; // ecran
@@ -229,10 +255,12 @@ const CoderAnimation = () => {
     };
   };
 
-  if (positionErrorByUser) {
-    errorWord[errorWord.length - 1 - Number(positionErrorByUser)] =
-      errorWord[errorWord.length - 1 - Number(positionErrorByUser)] ^ 1;
-    auxErrorWord = errorWord;
+  if (positionErrorByUser && wrapProps.currentStep===7) {
+    // let auxErrorWord: number[] = [];
+    // auxErrorWord = errorWord;
+    // auxErrorWord[errorWord.length - 1 - Number(positionErrorByUser)] =
+    // auxErrorWord[errorWord.length - 1 - Number(positionErrorByUser)] ^ 1;
+    // setErrorWord(auxErrorWord)
   }
 
   const gen = React.useMemo(() => generator(1), [userInput, informationByUser]);
@@ -270,6 +298,11 @@ const CoderAnimation = () => {
   };
 
   const handlePositionErrorInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let auxErrorWord: number[] = [];
+    auxErrorWord = errorWord;
+    auxErrorWord[errorWord.length - 1 - Number(e.target.value)] =
+    auxErrorWord[errorWord.length - 1 - Number(e.target.value)] ^ 1;
+    setErrorWord(auxErrorWord)
     setPositionErrorByUser(e.target.value);
     setWrapProps({
       ...wrapProps,
@@ -310,124 +343,88 @@ const CoderAnimation = () => {
   let r = errorWord;
 
   const firstForDecoder = (i: number) => {
-    tactDecoderDom = i;
-    C0d = C1d;
-    C1d = C2d;
-    S4 = celuleDecodor[2] ^ celuleDecodor[1];
-    S5 = S4 ^ r[i - 1];
-    console.log(r);
+   let tactDecoderDom = i;
+   let C0d = decoderProps.C1d;
+   let C1d = decoderProps.C2d;
+   let S4 = decoderProps.decoderCells[1] ^decoderProps.decoderCells[2];
+   let S5 = S4 ^ errorWord[i - 1];
 
-    // console.log(
-    //   "cuvanteornaat",
-    //   errorWord,
-    //   errorWord[tactDecoderDom - 1],
-    //   tactDecoderDom,
-    //   "tact",
-    //   C0d,
-    //   "c0",
-    //   C1d,
-    //   "c1d",
-    //   S4,
-    //   "s4",
-    //   S5,
-    //   "s5",
-    //   "celuledecodor",
-    //   celuleDecodor
-    // );
-    C2d = S5;
-    celuleDecodor.unshift(S5);
-    celuleDecodor.pop();
+
+   let  C2d = S5;
+   let decoderCells = decoderProps.decoderCells
+   decoderCells.unshift(S5);
+   decoderCells.pop();
 
     if (i === 7) {
-      celuleDecodor7 = celuleDecodor;
+      setDecoderProps(prev=>{return{...prev,decoderCells7:decoderCells}})
     }
-
-    setWrapProps((prev) => {
+    setDecoderProps((prev) => {
       return {
         ...prev,
-        celuleDecodor,
+        decoderCells,
         tactDecoderDom,
-        celuleDecodor7,
         S4,
         S5,
         C0d,
         C1d,
         C2d,
       };
-    });
-
-    return {
-      celuleDecodor,
-      tactDecoderDom,
-      celuleDecodor7,
-      S4,
-      S5,
-      C0d,
-      C1d,
-      C2d,
-    };
+    }); 
   };
+const handleDecoderFlow = () =>{
+  if(decodingStep<15){if(wrapProps.currentStep>=7){
+    setDecodingStep(prev=>prev+1)
+    setisDecoding(true);
+    setIsDecodingStarted(true);
+    if(decodingStep>7) secondForDecoder(decodingStep)
+    else firstForDecoder(decodingStep)
+  }}
+}
 
   const secondForDecoder = (contorStareFixa: number) => {
+    
     tactDecoderDomEroare = contorStareFixa;
-    tactDecoderDom = tactDecoderDomEroare;
+    let tactDecoderDom = tactDecoderDomEroare;
 
-    C0d = C1d;
-    C1d = C2d;
-    S4 = celuleDecodor7[2] ^ celuleDecodor7[1];
-    S5 = S4;
-    C2d = S5;
-    celuleDecodor7.unshift(S5);
-    celuleDecodor7.pop();
-
+    let C0d = decoderProps.C1d;
+    let C1d = decoderProps.C2d;
+    let S4 = decoderProps.decoderCells7[2] ^ decoderProps.decoderCells7[1];
+   let  S5 = S4;
+   let  C2d = S5;
+   let decoderCells7 = decoderProps.decoderCells7
+   decoderCells7.unshift(S5);
+   decoderCells7.pop();
+   let pozeinr = 0;
+ 
+   let  contorStareFixaGasita = 0
+   let cuvantdecodreceptionatsicorectat:number[] = []
     if (
-      celuleDecodor7[0] === 0 &&
-      celuleDecodor7[1] === 0 &&
-      celuleDecodor7[2] === 1
+      decoderCells7[0] === 0 &&
+      decoderCells7[1] === 0 &&
+      decoderCells7[2] === 1
     ) {
-      setIsStareFixaGasita(true);
-      setK(0);
+      setIsStareFixaGasita(true);    
       contorStareFixaGasita = contorStareFixa;
       pozeinr = 13 - contorStareFixaGasita;
+      let r = errorWord
       r[r.length - pozeinr - 1] = r[r.length - pozeinr - 1] ^ 1;
       cuvantdecodreceptionatsicorectat = r;
+      console.log(contorStareFixaGasita,"<-cuvant lung")
     }
-    setWrapProps((prev) => {
+    setDecoderProps((prev) => {
       return {
         ...prev,
-        celuleDecodor7,
+        decoderCells7,
         tactDecoderDomEroare,
         S4,
         S5,
-        contorStareFixaGasita,
+        contorStareFixaGasita:contorStareFixaGasita?contorStareFixaGasita:decoderProps.contorStareFixaGasita,
         tactDecoderDom,
         contorStareFixa,
-        cuvantdecodreceptionatsicorectat,
-        r,
+        cuvantdecodreceptionatsicorectat:cuvantdecodreceptionatsicorectat.length?cuvantdecodreceptionatsicorectat:decoderProps.cuvantdecodreceptionatsicorectat,
         pozeinr,
       };
     });
-
-    return {
-      celuleDecodor7,
-      tactDecoderDomEroare,
-      S4,
-      S5,
-      contorStareFixaGasita,
-      tactDecoderDom,
-      contorStareFixa,
-      cuvantdecodreceptionatsicorectat,
-      r,
-      pozeinr,
-    };
-  };
-
-  const genDecoder = React.useMemo(() => generatorDecoder(1), []);
-
-  const decoding = () => {
-    genDecoder.next();
-    setisDecoding(true);
-    setIsDecodingStarted(true);
   };
 
   return (
@@ -440,7 +437,7 @@ const CoderAnimation = () => {
           margin: "0px 400px 15px 0px",
         }}
       >
-        <ReactP5Wrapper sketch={(p5) => MySketch(p5, sketchProps)} />
+        <ReactP5Wrapper sketch={(p5) => MySketch(p5, {...sketchProps, errorWord:errorWord.join(""), positionErrorByUser,decoderProps})} />
       </Box>
       <Box
         style={{
@@ -490,6 +487,7 @@ const CoderAnimation = () => {
               <b>{wrongInformation}</b>
             </div>
           )}
+          {/* <Button onClick={handleDecoderFlow} variant="contained">test button decoder</Button> */}
           {userInput && (
             <Button
               variant="contained"
@@ -509,10 +507,10 @@ const CoderAnimation = () => {
               ) : tactDOM <= 7 && !wrapProps.transmissionEnded ? (
                 `Tact  ${tactDOM}`
               ) : (
-                <div onClick={decoding}>
+                <div onClick={handleDecoderFlow}>
                   {isDecoding ? (
                     isDecodingStarted ? (
-                      <div>Tact Decoder {wrapProps.tactDecoderDom}</div>
+                      <div>Tact Decoder {decoderProps.tactDecoderDom}</div>
                     ) : (
                       <p>"START"</p>
                     )
@@ -554,6 +552,7 @@ const CoderAnimation = () => {
             ) : (
               <input
                 type="text"
+                disabled={!!positionErrorByUser}
                 placeholder="0123456"
                 value={positionErrorByUser}
                 onChange={handlePositionErrorInput}
@@ -594,6 +593,7 @@ const CoderAnimation = () => {
         >
           {t("BACK")}
         </Button>
+        
         <Button
           variant="contained"
           style={{

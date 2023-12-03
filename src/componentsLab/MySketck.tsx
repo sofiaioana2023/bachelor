@@ -1,12 +1,14 @@
-import * as React from "react";
+import { Person4, PieChart } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import { yellow } from "@mui/material/colors";
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 import { use } from "i18next";
-import { labContext } from "../helpers/Contexts";
-import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
-import { Person4, PieChart } from "@mui/icons-material";
-import { yellow } from "@mui/material/colors";
+import * as React from "react";
 import { receiveMessageOnPort } from "worker_threads";
+
+import { IDecoderProps } from "../components/CoderAnimation";
+import { labContext } from "../helpers/Contexts";
 
 export function MySketch(p5: any, props: any) {
   const {
@@ -23,9 +25,10 @@ export function MySketch(p5: any, props: any) {
     transmissionEnded,
     errorWord,
     positionErrorByUser,
-  } = props;
+  } = props ;
   let myFont = "";
-
+  
+  const decoderProps:IDecoderProps = props.decoderProps
   p5.preload = () => {
     myFont = p5.loadFont(
       "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Bold.otf"
@@ -34,17 +37,14 @@ export function MySketch(p5: any, props: any) {
   let sursa = p5.createP("SURSĂ");
   let canal = p5.createP("CANAL");
   let destinatar = p5.createP("DESTINATAR");
-  let positionErrorByUserCanvas = p5.createP(positionErrorByUser);
-  let receivedWordWithError = p5.createP(errorWord);
-  // console.log(`cuvantul eronat in canvas este ${receivedWordWithError}`);
-  // console.log(`pozitie eroare in canvas ${positionErrorByUserCanvas}`);
+
   let informatieIntrodusaDeUser = p5.createP(informationByUser);
   let informatie = p5.createP("a6a5a4a3");
   let informatieCODATA = p5.createP("a6a5a4a3a2a1a0");
   let bitDeControlDreapta = p5.createP(valoareBitRedundant);
   let bitDeControlJos = p5.createP(valoareBitRedundant);
-  let xPosition = 60;
-  let yPosition = 415;
+
+  let errorWordP = p5.createP(errorWord);
   let bitDeInformatie = p5.createP(JSON.stringify(bitDeInfo));
   let bitDeInformatieSus = p5.createP(JSON.stringify(bitDeInfo));
   let bitC2 = p5.createP(JSON.stringify(celuleRegistru[0]));
@@ -249,33 +249,24 @@ export function MySketch(p5: any, props: any) {
       p5.translate(70, 0);
       p5.rect(0, 0, 20, 160);
       if (bitDeControlDreapta.position().x <= 239) {
+        if(transmissionEnded) bitDeControlDreapta.style("opacity",0)
         bitDeControlDreapta.position(177 + p5.frameCount * 4, 265);
         if (bitDeControlDreapta.position().x >= 236) {
           bitDeControlDreapta.html("");
         }
       }
       if (bitDeControlJos.position().y <= 410) {
+        if(transmissionEnded) bitDeControlJos.style("opacity",0)
         bitDeControlJos.position(240, 265 + p5.frameCount * 4);
         if (bitDeControlJos.position().y >= 410) {
           bitDeControlJos.html("");
         }
       }
-      if (positionErrorByUserCanvas) {
-        receivedWordWithError.style("color", "red");
-        receivedWordWithError.position(660, 495);
-      }
+     
+     
+     
+     
     }
-
-    //transmisia
-    // if (tactCanvas < 7) {
-    //   p5.fill(0);
-    //   p5.text("a6a5a4a3a2a1", 212, 455);
-    //   console.log("a6a5a6a4a3a2a1");
-    // } else if (tactCanvas === 7) {
-    //   p5.fill(0);
-    //   p5.text("Atenție, începe transmisia!", 212, 455);
-    //   console.log("Atenție, începe transmisia!");
-    // }
 
     //continuare canal
     p5.fill(c);
@@ -375,23 +366,23 @@ export function MySketch(p5: any, props: any) {
     p5.rect(16, 0, 5, 25);
     p5.translate(-40, 25);
     p5.rect(0, 0, 80, 60);
-    // p5.fill(c);
-    // p5.translate(40, 25);
-    // p5.rect(40, -8, 150, 20);
-    // p5.translate(170, -78);
-    // p5.rect(20, -160, 20, 250);
-    // p5.translate(0, -180);
-    // p5.rect(-50, 20, 90, 20);
-    // p5.translate(-30, 0);
-    // p5.rect(-23, -6, 20, 45);
-    // p5.pop();
+    p5.fill(c);
+    p5.translate(40, 25);
+    p5.rect(40, -8, 150, 20);
+    p5.translate(170, -78);
+    p5.rect(20, -160, 20, 250);
+    p5.translate(0, -180);
+    p5.rect(-50, 20, 90, 20);
+    p5.translate(-30, 0);
+    p5.rect(-23, -6, 20, 45);
+    p5.pop();
 
     ///miscare biti
     bitDeInformatie.style("color", "white");
     bitDeInformatieSus.style("color", "white");
     valoareS1.style("color", "white");
-    valoareS2Sus.style("color", "white");
-    valoareS2.style("color", "white");
+    valoareS2Sus.style("opacity", 0);
+    valoareS2.style("color", "green");
     valoareS2SusDreapta.style("color", "white");
     bitC1Jos.style("color", "white");
     bitC0Dreapta.style("color", "white");
@@ -399,6 +390,7 @@ export function MySketch(p5: any, props: any) {
     bitC0JosStanga.style("color", "white");
 
     if (bitDeInformatie.position().x <= 299) {
+      if(transmissionEnded) bitDeInformatie.style("opacity",0)
       bitDeInformatie.position(60 + p5.frameCount * 7, 415);
       if (bitDeInformatie.position().x >= 298 || currentStep === 0) {
         bitDeInformatie.html(""); // Hide the bit when it's very close to 299
@@ -406,13 +398,15 @@ export function MySketch(p5: any, props: any) {
     }
 
     if (bitDeInformatieSus.position().y >= 320) {
+      if(transmissionEnded) bitDeInformatieSus.style("opacity",0)
       bitDeInformatieSus.position(160, 415 - p5.frameCount * 4);
       if (bitDeInformatieSus.position().y <= 320 || currentStep === 0) {
         bitDeInformatieSus.html("");
       }
     }
-
+    console.log(decoderProps)
     if (valoareS1.position().y <= 325) {
+      if(transmissionEnded) valoareS1.style("opacity",0)
       valoareS1.position(157, 265 + p5.frameCount * 2);
       if (valoareS1.position().y === 325 || currentStep === 0) {
         valoareS1.html("");
@@ -420,6 +414,7 @@ export function MySketch(p5: any, props: any) {
     }
 
     if (valoareS2.position().x >= 60) {
+      if(transmissionEnded) valoareS2.style("opacity",0)
       valoareS2.position(132 - p5.frameCount * 3, 312);
       if (valoareS2.position().x === 60 || currentStep === 0) {
         valoareS2.html("");
@@ -427,12 +422,14 @@ export function MySketch(p5: any, props: any) {
     }
 
     if (valoareS2Sus.position().y >= 120) {
+      if(transmissionEnded) valoareS2Sus.style("opacity",0)
       valoareS2Sus.position(60, 312 - p5.frameCount * 3);
       if (valoareS2Sus.position().y === 120 || currentStep === 0) {
         valoareS2Sus.html("");
       }
     }
     if (valoareS2SusDreapta.position().x <= 120) {
+      if(transmissionEnded) valoareS2SusDreapta.style("opacity",0)
       valoareS2SusDreapta.position(60 + p5.frameCount * 3, 120);
       if (valoareS2SusDreapta.position().x === 120 || currentStep === 0) {
         valoareS2SusDreapta.html("");
@@ -441,12 +438,14 @@ export function MySketch(p5: any, props: any) {
 
     {
       if (bitC1Jos.position().y <= 197) {
+        if(transmissionEnded) bitC1Jos.style("opacity",0)
         bitC1Jos.position(155, 120 + p5.frameCount * (currentStep > 0 ? 4 : 0));
         if (bitC1Jos.position().y >= 197 || currentStep === 0) {
           bitC1Jos.html("");
         }
       }
       if (bitC0Dreapta.position().x <= 230) {
+        if(transmissionEnded) bitC0Dreapta.style("opacity",0)
         bitC0Dreapta.position(
           175 + p5.frameCount * (currentStep > 0 ? 4 : 0),
           120
@@ -456,12 +455,14 @@ export function MySketch(p5: any, props: any) {
         }
       }
       if (bitC0Jos.position().y <= 210) {
+        if(transmissionEnded) bitC0Jos.style("opacity",0)
         bitC0Jos.position(230, 120 + p5.frameCount * (currentStep > 0 ? 4 : 0));
         if (bitC0Jos.position().y >= 210 || currentStep === 0) {
           bitC0Jos.html("");
         }
       }
       if (bitC0JosStanga.position().x >= 0) {
+        if(transmissionEnded) bitC0JosStanga.style("opacity",0)
         bitC0JosStanga.position(
           230 - p5.frameCount * (currentStep > 0 ? 4 : 0),
           210
@@ -475,14 +476,16 @@ export function MySketch(p5: any, props: any) {
       if (tactCanvas === 7) {
         if (cuvantulDeCod.position().x <= 660) {
           if (!transmissionEnded)
-            cuvantulDeCod.position(250 + p5.frameCount, 425);
+            {cuvantulDeCod.position(250 + p5.frameCount, 425);
+              errorWordP.style("opacity",0)}
           if (cuvantulDeCod.position().x === 660 || transmissionEnded) {
-            cuvantulDeCod.position(660, 425);
+           
+            errorWordP.position(660, 425);
+           if(positionErrorByUser) errorWordP.style("color","red") ;else errorWordP.style("color","white")
+            
           }
         }
       }
-
-      // setTimeout(moveBits, 3000);
     }
   };
 }
