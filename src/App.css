@@ -193,7 +193,7 @@ body{
   padding: 16px 32px;
   opacity: 0.7;
   height: 900px;
-  width:2160px;
+  width: 100vw;
   letter-spacing: 2px;
   display: flex;
   flex-direction: column;
@@ -772,14 +772,14 @@ a:nth-child(1):hover{
   font-weight: 500;
 }
 .labelBiti{
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 800;
 }
 .inputBiti{
   text-align: center;
   padding:10px;
   width:200px;
-  height:80px;
+  height:40px;
   font-size: 35px;
   background-color: #e0e0de;
   color: #000;
@@ -829,7 +829,9 @@ a:nth-child(1):hover{
 }
 .transmisia{
   font-size: 20px;
+  margin-top:10px;
   font-weight: 900px;
+ 
 
 }
 .titleApplication{
