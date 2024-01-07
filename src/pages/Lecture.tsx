@@ -40,7 +40,9 @@ const Lecture = () => {
     newIsFlipped[index] = !newIsFlipped[index];
     setIsFlipped(newIsFlipped);
   };
-  const { t } = useTranslation();
+  const { t, i18n} = useTranslation();
+  const selectedLanguage = i18n.language
+
   const navigate = useNavigate();
   const simulate = () => {
     navigate("/application");
@@ -829,7 +831,7 @@ const Lecture = () => {
                       {t("exterioare pentru corecția erorilor")}
                     </b>
                   </Typography>
-                  {/* <div className="flashcards"></div> */}
+                 
                   <div
                     className={`flashCard ${isFlipped[7] ? "Flipped" : ""}`}
                     onClick={() => flipCard(7)}
@@ -904,14 +906,14 @@ const Lecture = () => {
                         flexDirection: "column",
                       }}
                     >
-                      <img
+                      {selectedLanguage ==="ro" &&<img
                         src={decoderptcorectie}
                         style={{
                           marginLeft: "1800px",
                           height: "500px",
                           width: "900px",
                         }}
-                      />
+                      />}
                     </div>
                   </div>
 

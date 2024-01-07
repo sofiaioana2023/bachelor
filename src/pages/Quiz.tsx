@@ -333,7 +333,7 @@ const Quiz = () => {
                 >
                   <b>
                     {userScor >= 0 && userScor < quiz!.length / 2 ? (
-                      <div>{t("Antrenează-te mai mult")}"</div>
+                      <div>{t("Antrenează-te mai mult")}</div>
                     ) : userScor >= quiz!.length / 2 &&
                       userScor <= quiz!.length - 1 ? (
                       <div>

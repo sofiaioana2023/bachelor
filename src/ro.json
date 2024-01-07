@@ -191,14 +191,14 @@
     "1. să fie primitiv ( are ca divizori pe 1 și pe el însuși)":"1. să fie primitiv ( are ca divizori pe 1 și pe el însuși)",
     "2. este de ordin k = n - m":"2. este de ordin k = n - m",
     "Relația":"Relația",
-    "indică faptul că":"indică faptul că",
-    "este un":"este un",
+    "indică faptul că":" indică faptul că",
+    "este un":" este un",
     "multiplu":"multiplu",
     "de-al":"de-al",
     "click pe buton pentru a vedea exemplu":"click pe buton pentru a vedea exemplu",
     "Exemplul 1":"Exemplul 1",
     "Metoda de codare algebrică":"Metoda de codare algebrică",
-    "implică utilizarea următoarei relații de codare:":"implică utilizarea următoarei relații de codare:",
+    "implică utilizarea următoarei relații de codare:":" implică utilizarea următoarei relații de codare:",
     "restul":"restul",
     "La decodare":"La decodare",
     "se va calcula":"se va calcula",
@@ -225,7 +225,24 @@
     "Decoder pentru detectia erorilor":"Decoder pentru detecția erorilor",
     "Teoria Transmiterii Informației":"Teoria Transmiterii Informației",
     "Simuleaza codare si decodarea":"Simulează codarea și decodarea",
-    "CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE":"CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE"
+    "CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE":"CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE",
+    "După codare, mesajul este transmis pe canalul de comunicație(unde radio/cablu coaxial/fibră optică)":"După codare, mesajul este transmis pe canalul de comunicație(unde radio/cablu coaxial/fibră optică)",
+    "La recepție mesajul transmis pe canal va fi decodat pentru a identifica și corecta erorile dacă există":"La recepție mesajul transmis pe canal va fi decodat pentru a identifica și corecta erorile dacă există",
+   
+    "transmsia":" transmsia",
+    "La recepție mesajul transmis pe canal va fi decodat pentru a identifica și corecta erori:le dacă există":"La recepție mesajul transmis pe canal va fi decodat pentru a identifica și corecta erorile dacă există",
+    "Tact":"Tact",
+    "Tact decoder": "Tact decoder",
+    "Secvență codată":"Secvență codată",
+    "Se caută starea fixă a registrului": "Se caută starea fixă a registrului",
+    "Starea fixă se regăsește la tactul":"Starea fixă se regăsește la tactul",
+    "unde se va corecta bitul eronat de la poziția": "unde se va corecta bitul eronat de la poziția",
+    "Exemplu" :"Exemplu"
+    
+
+    
+    
+
     
    
 

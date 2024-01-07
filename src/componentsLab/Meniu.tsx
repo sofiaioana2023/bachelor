@@ -9,13 +9,18 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import title from "../icons/title.png";
+import titlefr from "../icons/frTitle.png"
+import titleeng from "../icons/engTitle.png"
 import { useTranslation } from "react-i18next";
 
 const Meniu = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { setLabState, labState, userName, setUserName } =
     useContext(labContext);
+    
 
+    // Access the selected language
+    const selectedLanguage = i18n.language;
   const navigate = useNavigate();
   const handleUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
@@ -36,7 +41,8 @@ const Meniu = () => {
         justifyContent: "center",
         alignItems: "center",
       }}
-    >
+    > 
+       
       <div
         style={{
           marginBottom: "300px",
@@ -45,7 +51,7 @@ const Meniu = () => {
         }}
         className="titleApplication"
       >
-        <img src={title} style={{ width: "1300px" }} />
+        <img src={selectedLanguage === "ro"? title : selectedLanguage === "fr"? titlefr: titleeng } style={{ width: "1300px" }} />
       </div>
 
       <div className="submenu">

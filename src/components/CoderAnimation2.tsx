@@ -1,38 +1,40 @@
+import React from 'react'
 import { Box, Button, TextField } from "@mui/material";
 import { ReactP5Wrapper } from "@p5-wrapper/react";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { MySketch } from "../componentsLab/MySketck";
+import { MySketch2 } from "../componentsLab/MySketck2";
 import { labContext } from "../helpers/Contexts";
 import decoderschema from "../icons/decoderschema.png";
 import slide1 from "../icons/tact00.png";
-import slide2 from "../icons/tact1.png";
-import slide3 from "../icons/tact2.png";
-import slide4 from "../icons/tact3.png";
-import slide5 from "../icons/tact4.png";
-import slide6 from "../icons/tact5.png";
-import slide7 from "../icons/tact6.png";
-import slide8 from "../icons/tact7.png";
+import slide2 from "../icons/pol2tact1.png";
+import slide3 from "../icons/pol22.png";
+import slide4 from "../icons/pol23.png";
+import slide5 from "../icons/pol24.png";
+import slide6 from "../icons/pol25.png";
+import slide7 from "../icons/pol26.png";
+import slide8 from "../icons/pol2tact7.png";
 import EndLab from "../componentsLab/EndLab";
 import slide1FR from "../icons/SLIDE0FR.png";
 import slide1EN from "../icons/SLIDE0ENG.png";
 import decoden from "../icons/DECODENG.png"
-import decodfr from "../icons/DECODFR.png"
-import slide2en from "../icons/slide11.png";
-import slide3en from "../icons/slide12.png";
-import slide4en from "../icons/slide13.png";
-import slide5en from "../icons/slide14.png";
-import slide6en from "../icons/slide15.png";
-import slide7en from "../icons/slide16.png";
-import slide8en from "../icons/slide17.png";
-import slide2fr from "../icons/slidefr11.png";
-import slide3fr from "../icons/slidefr12.png";
-import slide4fr from "../icons/slidefr13.png";
-import slide5fr from "../icons/slidefr14.png";
-import slide6fr from "../icons/slidefr15.png";
-import slide7fr  from "../icons/slidefr16.png";
-import slide8fr from "../icons/slidefr17.png";
+import decodfr from "../icons/DECODFR.png";
+import slide2en from "../icons/slide21.png";
+import slide3en from "../icons/slide22.png";
+import slide4en from "../icons/slide23.png";
+import slide5en from "../icons/slide24.png";
+import slide6en from "../icons/slide25.png";
+import slide7en from "../icons/slide26.png";
+import slide8en from "../icons/slide27.png";
+import slide2fr from "../icons/slidefr21.png";
+import slide3fr from "../icons/slidefr22.png";
+import slide4fr from "../icons/slidefr23.png";
+import slide5fr from "../icons/slidefr24.png";
+import slide6fr from "../icons/slidefr25.png";
+import slide7fr from "../icons/slidefr26.png";
+import slide8fr from "../icons/slidefr27.png";
+
 
 
 export interface IDecoderProps{
@@ -48,8 +50,9 @@ export interface IDecoderProps{
   contorStareFixaGasita:number,
   cuvantdecodreceptionatsicorectat:number[]
 }
-const CoderAnimation = () => {
-  const { t, i18n} = useTranslation();
+
+const CoderAnimation2 = () => {
+  const { t, i18n } = useTranslation();
   const { labState, setLabState } = React.useContext(labContext);
   const [userInput, isUserInput] = React.useState<boolean>(false);
   const [currentStep, setCurrentStep] = React.useState(0);
@@ -96,7 +99,9 @@ const CoderAnimation = () => {
     slide7en,
     slide8en,
   ];
+  
   const selectedLanguage = i18n.language
+  console.log("dkdkkdkddkdk sle", selectedLanguage)
   const [decodingVariables, setdecodingVariable] = useState({});
   const [decodingStep,setDecodingStep] = useState(1)
   const [decoderProps,setDecoderProps] = useState<IDecoderProps>({
@@ -222,9 +227,9 @@ const CoderAnimation = () => {
     tact = `Coderul este la tactul ${i.toString()}`;
     tactCanvas = i;
     setTactDOM(tactCanvas);
-    sumator1 = String(celuleRegistru[1] ^ celuleRegistru[2]);
+    sumator1 = String(celuleRegistru[0] ^ celuleRegistru[2]);
     sumator2 = String(
-      celuleRegistru[1] ^ celuleRegistru[2] ^ informatie[i - 1]
+      celuleRegistru[0] ^ celuleRegistru[2] ^ informatie[i - 1]
     );
 
     C2 = Number(sumator2);
@@ -386,7 +391,7 @@ const CoderAnimation = () => {
    let tactDecoderDom = i;
    let C0d = decoderProps.C1d;
    let C1d = decoderProps.C2d;
-   let S4 = decoderProps.decoderCells[1] ^decoderProps.decoderCells[2];
+   let S4 = decoderProps.decoderCells[0] ^decoderProps.decoderCells[2];
    let S5 = S4 ^ errorWord[i - 1];
 
 
@@ -428,7 +433,7 @@ const handleDecoderFlow = () =>{
 
     let C0d = decoderProps.C1d;
     let C1d = decoderProps.C2d;
-    let S4 = decoderProps.decoderCells7[2] ^ decoderProps.decoderCells7[1];
+    let S4 = decoderProps.decoderCells7[2] ^ decoderProps.decoderCells7[0];
    let  S5 = S4;
    let  C2d = S5;
    let decoderCells7 = decoderProps.decoderCells7
@@ -482,7 +487,7 @@ const handleDecoderFlow = () =>{
           margin: "0px 400px 15px 0px",
         }}
       >
-        <ReactP5Wrapper sketch={(p5) => MySketch(p5, {...sketchProps, errorWord:errorWord.join(""), positionErrorByUser,decoderProps,selectedLanguage})} />
+        <ReactP5Wrapper sketch={(p5) => MySketch2(p5, {...sketchProps, errorWord:errorWord.join(""), positionErrorByUser,decoderProps,selectedLanguage})} />
       </Box>
       <Box
         style={{
@@ -507,8 +512,8 @@ const handleDecoderFlow = () =>{
               </div>
             ) : wrapProps.transmissionEnded ? (
               <div className="transmisia">
-                {positionErrorByUser?<b>{t("La recepție mesajul transmis pe canal va fi decodat pentru a identifica și corecta erorile dacă există")}</b>: <b>
-                  {t("S-a terminat")} <del>{t("transmisia")}</del>
+                {positionErrorByUser?<b>{t("La recepție mesajul transmis pe canal va fi decodat pentru a identifica și corecta erorile dacă există")} </b>: <b>
+                 { t("S-a terminat") }<del>{t("transmisia")}</del>
                 </b>}
                 
               </div>
@@ -528,10 +533,9 @@ const handleDecoderFlow = () =>{
               </>
             )}
           </form>
-          
-          {!userInput &&  (
+          {!userInput && (
             <div className="transmisia">
-             { selectedLanguage ==="ro" && <b>{wrongInformation}</b>}
+              { selectedLanguage ==="ro" && <b>{wrongInformation}</b>}
             </div>
           )}
           
@@ -552,7 +556,7 @@ const handleDecoderFlow = () =>{
               {tactDOM === 0 ? (
                 <div> {t("START")}</div>
               ) : tactDOM <= 7 && !wrapProps.transmissionEnded ? (
-                tactDOM === 7?<div>{t("Secvență codată")}</div> : <div> {t("Tact")} {tactDOM}</div>
+                tactDOM === 7? <div>{t("Secvență codată")}</div> : <div> {t("Tact")} {tactDOM}</div>
               ) : (
                 <div onClick={handleDecoderFlow}>
                   {isDecoding ? (
@@ -609,7 +613,7 @@ const handleDecoderFlow = () =>{
           </form>
         )}
       </Box>
-      
+
       { selectedLanguage === "ro" && <img
         src={wrapProps.transmissionEnded ? decoderschema : slides[tactDOM]}
         style={{ width: "1300px", height: "760px", marginTop: "20px" }}
@@ -667,6 +671,7 @@ const handleDecoderFlow = () =>{
           {t("NEXT")}
         </Button> */}
         
+        
       </div>
     </div> : <EndLab/>}
       
@@ -674,4 +679,4 @@ const handleDecoderFlow = () =>{
   );
 };
 
-export default CoderAnimation;
+export default CoderAnimation2

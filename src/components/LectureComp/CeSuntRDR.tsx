@@ -50,7 +50,7 @@ const CeSuntRDR = () => {
             variant="contained"
             onClick={() => openImageInModal(exemple[0])}
           >
-            {t("Exemplul")} 2
+            {t("Exemplu")} 
           </Button>
         </div>
       </div>
@@ -121,7 +121,7 @@ const CeSuntRDR = () => {
               variant="contained"
               onClick={() => openImageInModal(exemple[2])}
             >
-              {t("Exemplul 3")}
+              {t("Exemplu")}
             </Button>
           </div>
         </div>

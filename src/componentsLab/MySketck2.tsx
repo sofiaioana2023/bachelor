@@ -1,16 +1,9 @@
-import { Opacity, Person4, PieChart } from "@mui/icons-material";
-import { Button } from "@mui/material";
-import Box from "@mui/material/Box";
-import { yellow } from "@mui/material/colors";
-import { ReactP5Wrapper } from "@p5-wrapper/react";
-import { use } from "i18next";
-import * as React from "react";
-import { receiveMessageOnPort } from "worker_threads";
 
-import { IDecoderProps } from "../components/CoderAnimation";
-import { labContext } from "../helpers/Contexts";
+import { IDecoderProps } from "../components/CoderAnimation2";
+import { useTranslation } from "react-i18next";
 
-export function MySketch(p5: any, props: any) {
+
+export function MySketch2(p5: any, props: any) {
   const {
     celuleRegistru,
     valoareBitRedundant,
@@ -30,14 +23,13 @@ export function MySketch(p5: any, props: any) {
   let myFont = "";
  
   const decoderProps:IDecoderProps = props.decoderProps
-
+  
+  console.log(selectedLanguage)
   p5.preload = () => {
     myFont = p5.loadFont(
       "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Bold.otf"
     );
   };
-
-  
 
   let sursa = p5.createP("SURSĂ");
   let sursaengfr = p5.createP("SOURCE");
@@ -104,6 +96,7 @@ export function MySketch(p5: any, props: any) {
   let C1d = p5.createP(decoderProps.C1d)
   let C1dd = p5.createP(decoderProps.C1d)
   let C2d = p5.createP(decoderProps.C2d)
+  let C2dd = p5.createP(decoderProps.C2d)
  let S3value = p5.createP(decoderProps.S5)
  let S4value = p5.createP(decoderProps.S4)
   let C0dd = p5.createP(decoderProps.C0d)
@@ -135,7 +128,7 @@ export function MySketch(p5: any, props: any) {
     let S1 = p5.createP("S1");
     S1.style("color", "#ffa600");
     S1.style("font-weight", "800");
-    S1.position(154, 223);
+    S1.position(144, 223);
 
     valoareS1.style("color", "white");
     valoareS1.style("font-weight", "800");
@@ -146,14 +139,11 @@ export function MySketch(p5: any, props: any) {
     S2.style("font-weight", "800");
     S2.position(154, 315);
 
+    
     destinatar.position(48000, 1000);
     destinatarfr.position(49000, 1000);
     destinatareng.position(50000, 1000);
-    
-
-
-   
-    sursa.position(48000, 1000);
+    sursa.position(48000,1000);
     sursaengfr.position(48000, 1000);
     canaleng.position(48000, 1000);
     canal.position(48000, 1000);
@@ -202,6 +192,7 @@ export function MySketch(p5: any, props: any) {
       sursaengfr.position(25, 485);
      
     }
+
     detector1.position(9000, 9000)
     detector1.style("color","white")
     detector1.style("font-weight","800")
@@ -284,6 +275,9 @@ export function MySketch(p5: any, props: any) {
     C2d.style("color","white")
     C2d.style("font-weight", "800")
     C2d.position(840,340)
+    C2dd.style("color","white")
+    C2dd.style("font-weight", "800")
+    C2dd.position(840,340)
    
   errorbit1.position(860,340)
   errorbit2.position(860,340)
@@ -299,13 +293,13 @@ export function MySketch(p5: any, props: any) {
   errorbit5ToS3.position(860,340)
   errorbit6ToS3.position(860,340)
   errorbit7ToS3.position(860,340)
-  correctbit1.position(860,940)
-  correctbit2.position(860,940)
-  correctbit3.position(860,940)
-  correctbit4.position(860,940)
-  correctbit5.position(860,940)
-  correctbit6.position(860,940)
-  correctbit7.position(860,940)
+  correctbit1.position(860,340)
+  correctbit2.position(860,340)
+  correctbit3.position(860,340)
+  correctbit4.position(860,340)
+  correctbit5.position(860,340)
+  correctbit6.position(860,340)
+  correctbit7.position(860,340)
 
     
 
@@ -348,7 +342,7 @@ export function MySketch(p5: any, props: any) {
     p5.translate(20, -5);
     p5.rect(0, 0, 20, 40);
     p5.fill(c);
-    p5.rect(22.5, 40, 15, 60);
+    p5.rect(3.5, 40, 15, 60);
     p5.fill(c2);
     p5.translate(20, 0);
     p5.rect(1, 0, 20, 40);
@@ -363,7 +357,7 @@ export function MySketch(p5: any, props: any) {
     p5.rect(0, 0, -70, 30);
     p5.translate(-70, 0);
     p5.fill(c2);
-    p5.rect(0, -10, -40, 50);
+    p5.rect(0, -10, -60, 50);
     p5.fill(c);
     p5.translate(-35, 40);
     p5.rect(0, 0, 30, 25);
@@ -492,9 +486,9 @@ export function MySketch(p5: any, props: any) {
     p5.translate(-30, 80);
     p5.triangle(-5, 0, 35, 0, 15, 30);
     p5.translate(92.5, 30);
-    p5.rect(10, -45, 15, 50);
+    p5.rect(-10, -45, 15, 50);
     p5.translate(10, -50);
-    p5.rect(0, 0, 100, 15);
+    p5.rect(-20, 0, 120, 15);
     p5.translate(100, 0);
     p5.rect(-10, 0, 15, 40);
     p5.translate(-18, 22);
@@ -535,7 +529,7 @@ export function MySketch(p5: any, props: any) {
       if(transmissionEnded) bitDeInformatie.style("opacity",0)
       bitDeInformatie.position(60 + p5.frameCount * 7, 415);
       if (bitDeInformatie.position().x >= 298 || currentStep === 0) {
-        bitDeInformatie.html(""); // Hide the bit when it's very close to 299
+        bitDeInformatie.html(""); 
       }
     }
 
@@ -581,7 +575,7 @@ export function MySketch(p5: any, props: any) {
     {
       if (bitC1Jos.position().y <= 197) {
         if(transmissionEnded) bitC1Jos.style("opacity",0)
-        bitC1Jos.position(155, 120 + p5.frameCount * (currentStep > 0 ? 4 : 0));
+        bitC1Jos.position(135, 120 + p5.frameCount * (currentStep > 0 ? 4 : 0));
         if (bitC1Jos.position().y >= 197 || currentStep === 0) {
           bitC1Jos.html("");
         }
@@ -625,7 +619,7 @@ export function MySketch(p5: any, props: any) {
           if (cuvantulDeCod.position().x === 660 || transmissionEnded) {
            
             errorWordP.position(660, 425);
-           if(positionErrorByUser) errorWordP.style("color","red") ;else errorWordP.style("color","white")
+           if(positionErrorByUser) {errorWordP.style("color","red"); errorWordP.style("font-weight","800")} else errorWordP.style("color","white")
             
           }
           else errorWordP.position(0,0)
@@ -658,16 +652,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -722,17 +717,18 @@ export function MySketch(p5: any, props: any) {
       }else{
         S3value.html("")
       }
-      
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+    
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -792,16 +788,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -865,18 +862,19 @@ export function MySketch(p5: any, props: any) {
           S3value.html("")
         }
         
-        if (C1d.position().y > 275 && C1d.position().x<950){
-          C1d.position(860, 340-p5.frameCount*4)
-        }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-          C1d.position(820+p5.frameCount*3, 275)
-        }
-        else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-          C1d.position(951,235+p5.frameCount*2)
-        }
-        else {
-          C1d.html("")
-          errorbit1ToS3.html("")
-        }
+        if (C2d.position().y > 275 && C2d.position().x<950){
+            C2d.position(840, 340-p5.frameCount*4)
+          }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+            C2d.position(800+p5.frameCount*3, 275)
+          }
+          else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+            C2d.position(951,235+p5.frameCount*2)
+          }
+          else {
+    
+            C2d.html("")
+            errorbit1ToS3.html("")
+          }
   
         if ( C0d.position().x <= 920 ){
           C0d.position(880+p5.frameCount*3,340)
@@ -942,16 +940,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1023,16 +1022,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1104,16 +1104,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1176,18 +1177,19 @@ export function MySketch(p5: any, props: any) {
           S3value.html("")
         }
         
-        if (C1d.position().y > 275 && C1d.position().x<950){
-          C1d.position(860, 340-p5.frameCount*4)
-        }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-          C1d.position(820+p5.frameCount*3, 275)
-        }
-        else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-          C1d.position(951,235+p5.frameCount*2)
-        }
-        else {
-          C1d.html("")
-          errorbit1ToS3.html("")
-        }
+        if (C2d.position().y > 275 && C2d.position().x<950){
+            C2d.position(840, 340-p5.frameCount*4)
+          }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+            C2d.position(800+p5.frameCount*3, 275)
+          }
+          else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+            C2d.position(951,235+p5.frameCount*2)
+          }
+          else {
+    
+            C2d.html("")
+            errorbit1ToS3.html("")
+          }
   
         if ( C0d.position().x <= 920 ){
           C0d.position(880+p5.frameCount*3,340)
@@ -1270,18 +1272,19 @@ export function MySketch(p5: any, props: any) {
           S3value.html("")
         }
         
-        if (C1d.position().y > 275 && C1d.position().x<950){
-          C1d.position(860, 340-p5.frameCount*4)
-        }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-          C1d.position(820+p5.frameCount*3, 275)
-        }
-        else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-          C1d.position(951,235+p5.frameCount*2)
-        }
-        else {
-          C1d.html("")
-          errorbit1ToS3.html("")
-        }
+        if (C2d.position().y > 275 && C2d.position().x<950){
+            C2d.position(840, 340-p5.frameCount*4)
+          }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+            C2d.position(800+p5.frameCount*3, 275)
+          }
+          else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+            C2d.position(951,235+p5.frameCount*2)
+          }
+          else {
+    
+            C2d.html("")
+            errorbit1ToS3.html("")
+          }
   
         if ( C0d.position().x <= 920 ){
           C0d.position(880+p5.frameCount*3,340)
@@ -1368,16 +1371,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1464,16 +1468,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1562,18 +1567,19 @@ export function MySketch(p5: any, props: any) {
           S3value.html("")
         }
         
-        if (C1d.position().y > 275 && C1d.position().x<950){
-          C1d.position(860, 340-p5.frameCount*4)
-        }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-          C1d.position(820+p5.frameCount*3, 275)
-        }
-        else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-          C1d.position(951,235+p5.frameCount*2)
-        }
-        else {
-          C1d.html("")
-          errorbit1ToS3.html("")
-        }
+        if (C2d.position().y > 275 && C2d.position().x<950){
+            C2d.position(840, 340-p5.frameCount*4)
+          }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+            C2d.position(800+p5.frameCount*3, 275)
+          }
+          else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+            C2d.position(951,235+p5.frameCount*2)
+          }
+          else {
+    
+            C2d.html("")
+            errorbit1ToS3.html("")
+          }
   
         if ( C0d.position().x <= 920 ){
           C0d.position(880+p5.frameCount*3,340)
@@ -1663,16 +1669,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1765,16 +1772,17 @@ export function MySketch(p5: any, props: any) {
         S3value.html("")
       }
       
-      if (C1d.position().y > 275 && C1d.position().x<950){
-        C1d.position(860, 340-p5.frameCount*4)
-      }else if ( C1d.position().y <= 275 && C1d.position().x < 950){
-        C1d.position(820+p5.frameCount*3, 275)
+      if (C2d.position().y > 275 && C2d.position().x<950){
+        C2d.position(840, 340-p5.frameCount*4)
+      }else if ( C2d.position().y <= 275 && C2d.position().x < 950){
+        C2d.position(800+p5.frameCount*3, 275)
       }
-      else if ( C1d.position().y >= 275 && C1d.position().y<=340 && C1d.position().x > 950){
-        C1d.position(951,235+p5.frameCount*2)
+      else if ( C2d.position().y >= 275 && C2d.position().y<=340 && C2d.position().x > 950){
+        C2d.position(951,235+p5.frameCount*2)
       }
       else {
-        C1d.html("")
+
+        C2d.html("")
         errorbit1ToS3.html("")
       }
 
@@ -1902,9 +1910,10 @@ export function MySketch(p5: any, props: any) {
       }else{
         detector0.html("")
         detector1.html("")
-      }
     }
-   
-
-  };
 }
+
+
+};
+}
+

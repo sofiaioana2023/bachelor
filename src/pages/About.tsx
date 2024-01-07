@@ -58,11 +58,11 @@ const About = () => {
               {t(
                 "pentru a dobândi cunoștintele fundamentale referitoare la codul vizat,"
               )}
-              <b>„{t("Lucrare de laborator")}”</b>{" "}
+              <b>„{t("Application")}”</b>{" "}
               {t(
                 "în cadrul căreia utilizatorul poate simula atât procesul de codare, cât și decodarea prin regiștrii de deplasare cu reacție cu sumatoare modulo-2 exterioare. A treia secțiune denumită"
               )}{" "}
-              <b>„{t("Teste")}”</b>,{" "}
+              <b>„{t("Quiz")}”</b>,{" "}
               {t(
                 "oferă studentului ocazia de a-și evalua noțiunile asimilate."
               )}

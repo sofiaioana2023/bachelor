@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { labContext } from "../helpers/Contexts";
 import { Button, Typography } from "@mui/material";
 import phone from "../icons/backtomenuphoto.png";
+import phoneeng from "../icons/phoneng.png";
 import MAP from "../icons/MAP.png";
 import { handleAplicatie } from "../pages/HomePage";
 import { handleCurs } from "../pages/HomePage";
@@ -12,7 +13,8 @@ const EndLab = () => {
     useContext(labContext);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [time, setTime] = useState<string>(new Date().toLocaleTimeString());
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const selectedLanguage = i18n.language
   const refreshTime = () => {
     setTime(new Date().toLocaleTimeString());
   };
@@ -50,8 +52,11 @@ const EndLab = () => {
             {t("ai ajuns la finalul laboratorului!")}
           </b>
         </Typography>
-        <div className="phoneButton">
-          <img src={phone} />
+        
+        
+       { selectedLanguage ==="ro" && <div className="phoneButton">
+
+          <img src ={phone} />
           <button
             className={
               isHovered ? "positionedButton:hover" : "positionedButton"
@@ -73,7 +78,19 @@ const EndLab = () => {
           <div className="time">
             <b>{time}</b>
           </div>
-        </div>
+        </div>} 
+       {selectedLanguage !=="ro" && <div style={{display:"flex", flexDirection:"column", justifyContent:"center",alignItems:"center"}}><div style={{letterSpacing:"5px",marginBottom:"100px"}}>{t("Apasa butonul pentru a reveni la meniu")}</div> <Button onClick={moveToMenu} variant="contained"
+            style={{
+              backgroundColor: "#000",
+              color: "aliceblue",
+              fontSize: "25px",
+              margin: "25px 0px",
+              width: "400px",
+              height: "80px",
+              boxShadow:
+                " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
+            }}>{t("Click aici")}</Button></div>}
+       
 
         <div className="mapButtons">
           <img src={MAP} style={{ height: "400px", width: "500px" }} />

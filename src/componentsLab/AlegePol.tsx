@@ -2,12 +2,17 @@ import { Button } from "@mui/material";
 import React, { useContext } from "react";
 import { labContext } from "../helpers/Contexts";
 import alegepolinom from "../icons/alegepolinom.png";
+import alegepolinomeng1 from "../icons/alegepoleng.png";
+import alegepolinomeng2 from "../icons/alegepolinom2eng.png"
+import alegepolinomeng1fr from "../icons/alegepolinom1fr.png"
+import alegepolinomeng2fr from "../icons/alegepolinom2fr.png"
 import alegepolinompoza from "../icons/alegepolinompoza.png";
 import { useTranslation } from "react-i18next";
 
 const AlegePol = () => {
   const { setLabState, labState } = useContext(labContext);
-  const { t } = useTranslation();
+  const { t, i18n} = useTranslation();
+  const selectedLanguage = i18n.language
   return (
     <div className="alegePolinom">
       {/* <div>
@@ -28,7 +33,7 @@ const AlegePol = () => {
       Alege un polinom generator pentru a începe codarea și decodarea : */}
       <div>
         <img
-          src={alegepolinom}
+          src={ selectedLanguage === "ro"? alegepolinom : selectedLanguage === "en"? alegepolinomeng1 : alegepolinomeng1fr }
           style={{
             height: "800px",
             width: "1400px",
@@ -110,6 +115,7 @@ const AlegePol = () => {
                   boxShadow:
                     " 0px 10px 1px rgba(221, 221, 221, 1), 0 10px 20px rgba(204, 204, 204, 1)",
                 }}
+                onClick={() => setLabState("coder2")}
               >
                 <b>
                   g(x) = x<sup>3</sup> + x<sup>2</sup> + 1, g<sub>3</sub> = g
@@ -119,7 +125,7 @@ const AlegePol = () => {
             </div>
           </div>
           <img
-            src={alegepolinompoza}
+            src={ selectedLanguage === "ro"? alegepolinompoza: selectedLanguage === "en"? alegepolinomeng2 : alegepolinomeng2fr }
             style={{ height: "300px", width: "500px" }}
           />
         </div>

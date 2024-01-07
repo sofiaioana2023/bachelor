@@ -14,7 +14,8 @@ const CodareAlgebrica = () => {
     );
     return modalWindow;
   }
-  const { t } = useTranslation();
+  const { t, i18n} = useTranslation();
+  const selectedLanguage = i18n.language
   return (
     <div className="codareAlgebricaContainer">
       <div style={{ marginTop: "12px" }}>
@@ -57,14 +58,14 @@ const CodareAlgebrica = () => {
           </span>
         </div>
       </div>
-      <div>
+      <div  >
         <b>{t("Polinomul generator al codului")}</b> {t("se notează cu")}
-        <span className="formulapolygen">
-          g(x) = g<sub>0</sub> + g <sub>1</sub>x + g<sub>2 </sub>x<sup>2</sup>+
+        <div className="formulapolygen">
+          <span>g(x) = g<sub>0</sub> + g <sub>1</sub>x + g<sub>2</sub>x<sup>2</sup>+
           g<sub>3</sub>x<sup>3</sup>+ ..... + g<sub>k-1</sub>x<sup>k-1</sup> + g
           <sub>k</sub> x<sup>k</sup>, g<sub>k</sub> = 1 (întotdeauna), g
-          <sub>i</sub> ∈ {"{0,1}"}{" "}
-        </span>
+          <sub>i</sub> ∈ {"{0,1}"}</span>
+        </div>
         {t("și trebuie să împlinească simultan două condiții")} :
         <div>
           <b>
@@ -82,28 +83,28 @@ const CodareAlgebrica = () => {
       <div>
         {t("Relația")} <b>v(x) = i(x)g(x)</b> {t("indică faptul că")} <b>v</b>
         {t("este un")}
-        <b> {t("multiplu")}</b> {t("de-al")} <b>g(x)</b>(
-        <span style={{ color: "#6c71a1" }}>
+        <b> {t("multiplu")}</b> {t("de-al")} <b>g(x)</b>
+        {selectedLanguage ==="ro" && <span style={{ color: "#6c71a1" }}>
           <b>{t("click pe buton pentru a vedea exemplu")}</b>
-        </span>
-        ).
+        </span>}
+        .
       </div>
-      <div>
+      {selectedLanguage ==="ro" &&<div>
         <Button
           style={{ backgroundColor: "#6c71a1", fontWeight: "bold" }}
           variant="contained"
           onClick={() => openImageInModal(codMultipluAlgen)}
         >
-          {t("Exemplul 1")}
+          {t("Exemplu")}
         </Button>
-      </div>
+      </div>}
 
       <div>
-        <b>{t("Metoda de codare algebrică")}</b>{" "}
+        <b>{t("Metoda de codare algebrică")}</b>
         {t("implică utilizarea următoarei relații de codare:")}
-        <div>
-          <span className="formulapoly">
-            v(x) = x<sup>k</sup>i(x) + {t("restul")} (x<sup>k</sup>
+        <div className="formulapoly">
+          <span >
+            v(x) = x <sup>k</sup> i(x) + {t("restul")} (x <sup>k</sup>
             i(x))/g(x).
           </span>
         </div>
