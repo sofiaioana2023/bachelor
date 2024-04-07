@@ -34,20 +34,20 @@ const Home = () => {
   return (
     <Layout>
       <div className="containerColumnForHomePage">
-        <div className="backgroundHome">
-          <div className="middle">
-            <div className="text">
-              <div>
+        {/* <div className="backgroundHome"> */}
+          {/* <div className="middle">
+            <div className="text"> */}
+              {/* <div>
                 {t(
                   "Richard Wesley Hamming was an American mathematician and computer scientist."
                 )}
-              </div>
-              <div>
+              </div> */}
+              {/* <div>
                 {t(
                   "One of his most well-known contributions is the development of Hamming codes, a class of error-correcting codes used in digital communication to detect and correct errors in transmitted data."
                 )}
-              </div>
-            </div>
+              </div> */}
+            {/* </div>
           </div>
           <div className="text-block">
             <h4>
@@ -58,12 +58,12 @@ const Home = () => {
             </h4>
 
             <p>Richard Hamming</p>
-          </div>
-          <div className="HammingCode">
+          </div> */}
+          {/* <div className="HammingCode">
             {t(
               "Codul Hamming ciclic corector de o eroare utilizat în codarea canalului"
             )}
-          </div>
+          </div> */}
         </div>
         <div className="introduction">
           <div className="introductionAnimation">
@@ -214,7 +214,7 @@ const Home = () => {
             bună a acestuia utilizatorul este invitat să parcurgă secțiunile de
             mai jos.
           </Typography> */}
-        </div>
+        {/* </div> */}
         <div className="cardsHomeContainer">
           <Card
             sx={{ width: 400, height: 500, marginRight: "20px" }}

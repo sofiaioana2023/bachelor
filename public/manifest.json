@@ -1,6 +1,6 @@
 {
-  "short_name": "Cyclic Hamming Code App",
-  "name": "Cyclic Hamming Code App using LFSR",
+  "short_name": "Codul Hamming ciclic corector de o eroare",
+  "name": "CODARE ȘI DECODARE CICLICĂ PRIN REGIȘTRII DE DEPLASARE CU REACȚIE",
   "icons": [
     {
       "src": "./images/computer.png",
